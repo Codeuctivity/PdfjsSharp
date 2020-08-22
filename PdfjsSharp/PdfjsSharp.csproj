@@ -68,11 +68,11 @@
   </ItemGroup>
 
   <Target Name="NpmInstall" BeforeTargets="Build" Condition="!Exists('$(ProjectDir)node_modules')">
-    <Exec WorkingDirectory="$(ProjectDir)" Command="npm install" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="npm install --production" />
   </Target>
 
   <Target Name="DropNodeModules" AfterTargets="Clean">
     <RemoveDir Directories="$(ProjectDir)node_modules" />
-    <Exec WorkingDirectory="$(ProjectDir)" Command="npm install" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="npm install --production" />
   </Target>
 </Project>

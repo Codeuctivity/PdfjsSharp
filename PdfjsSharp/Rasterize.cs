@@ -1,4 +1,5 @@
 ﻿using Jering.Javascript.NodeJS;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -10,17 +11,24 @@ namespace PdfjsSharp
     public static class Rasterize
     {
         /// <summary>
-        /// Converts a pdf to a png
+        /// Converts a pdf to pngs
         /// </summary>
         /// <param name="pathToPdf"></param>
         /// <param name="pathToPngOutput">Prefix of file path to pngs created for each page of pdf. E.g. c:\temp\PdfPage will result in c:\temp\PdfPage1.png and c:\temp\PdfPage2.png for a Pdf with two pages.</param>
-        /// <returns></returns>
-        public static async Task<int> ConvertToPngAsync(string pathToPdf, string pathToPngOutput)
+        /// <returns>Collection of paths to pngs for each page in the pdf</returns>
+        public static async Task<IReadOnlyList<string>> ConvertToPngAsync(string pathToPdf, string pathToPngOutput)
         {
+            var pathsToPngOfEachPage = new List<string>();
             // Invoke javascript in Node.js
             var pdfRasterizerJsPath = File.ReadAllText("Rasterize.js");
             var pageQuantiy = await StaticNodeJSService.InvokeFromStringAsync<int>(pdfRasterizerJsPath, args: new object[] { pathToPdf, pathToPngOutput }).ConfigureAwait(false);
-            return pageQuantiy;
+
+            for (var pagenumber = 1; pagenumber <= pageQuantiy; pagenumber++)
+            {
+                pathsToPngOfEachPage.Add($"{pathToPngOutput}{pagenumber}.png");
+            }
+
+            return pathsToPngOfEachPage.AsReadOnly();
         }
     }
 }

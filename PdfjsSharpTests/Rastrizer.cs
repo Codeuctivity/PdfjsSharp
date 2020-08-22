@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -10,10 +11,10 @@ namespace PdfjsSharpTests
         public async Task ShouldCreatePngFromPdf()
         {
             var actualImagePath = Path.Combine(Path.GetTempPath(), "ActualShouldCreatePngFromPdf");
-            var pageQuantity = await PdfjsSharp.Rasterize.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
+            var actualImages = await PdfjsSharp.Rasterize.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
 
-            Assert.Equal(1, pageQuantity);
-            Assert.True(Codeuctivity.ImageSharpCompare.ImageAreEqual($"{actualImagePath}1.png", @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"));
+            Assert.Equal(1, actualImages.Count);
+            Assert.True(Codeuctivity.ImageSharpCompare.ImageAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"));
         }
     }
 }

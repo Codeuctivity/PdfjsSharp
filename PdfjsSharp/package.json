@@ -5,9 +5,7 @@
   "main": "Rasterize.js",
   "dependencies": {
     "assert": "^2.0.0",
-    "pdfjs-dist": "^2.4.456"
-  },
-  "devDependencies": {
+    "pdfjs-dist": "^2.4.456",
     "canvas": "^2.6.1"
   },
   "scripts": {
