@@ -5,8 +5,8 @@
   "main": "Rasterize.js",
   "dependencies": {
     "assert": "^2.0.0",
-    "pdfjs-dist": "^2.4.456",
-    "canvas": "^2.6.1"
+    "canvas": "^2.6.1",
+    "pdfjs-dist": "^2.4.456"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
