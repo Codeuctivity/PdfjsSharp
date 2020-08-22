@@ -4,7 +4,7 @@ image:
   - Ubuntu
 skip_tags: true
 configuration: Release
-bbefore_build:
+before_build:
   - ps: >-
       nuget restore
 build:
