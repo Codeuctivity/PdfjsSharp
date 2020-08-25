@@ -1,8 +1,12 @@
 # PdfjsSharp
 
-[![Build status](https://ci.appveyor.com/api/projects/status/f5f4mvh98eqkjanp/branch/master?svg=true)](https://ci.appveyor.com/project/stesee/pdfjssharp/branch/master) [![Nuget](https://img.shields.io/nuget/v/PdfjsSharp.svg)](https://www.nuget.org/packages/PdfjsSharp/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c417a8e923da45ed90c302c4a23528ea)](https://www.codacy.com/gh/Codeuctivity/PdfjsSharp?utm_source=github.com&utm_medium=referral&utm_content=Codeuctivity/PdfjsSharp&utm_campaign=Badge_Grade)[![Build Status](https://travis-ci.com/Codeuctivity/PdfjsSharp.svg?branch=travis)](https://travis-ci.com/Codeuctivity/PdfjsSharp)
+[![Nuget](https://img.shields.io/nuget/v/PdfjsSharp.svg)](https://www.nuget.org/packages/PdfjsSharp/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c417a8e923da45ed90c302c4a23528ea)](https://www.codacy.com/gh/Codeuctivity/PdfjsSharp?utm_source=github.com&utm_medium=referral&utm_content=Codeuctivity/PdfjsSharp&utm_campaign=Badge_Grade)[![Build Status](https://travis-ci.com/Codeuctivity/PdfjsSharp.svg?branch=travis)](https://travis-ci.com/Codeuctivity/PdfjsSharp)
 
 Brings Pdfjs to .net
+
+## Feature
+
+- Renders each page of a given pdf to pngs
 
 ## Dependencies
 
@@ -18,7 +22,7 @@ get nodejs lts from <https://nodejs.org/en/download/>
 var actualImages = await PdfjsSharp.Rasterize.ConvertToPngAsync("pathToSome.pdf", "somePathToAOutputLocation");
 ```
 
-- "actualImages" will give a collection of paths to the renderd pages as png
+- "actualImages" will give a collection of paths to the rendered pages stored as png
 
 ## Development
 
