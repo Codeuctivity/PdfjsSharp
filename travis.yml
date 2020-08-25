@@ -1,0 +1,14 @@
+language: csharp
+mono: none
+dotnet: 3.1.401
+script:
+  - dotnet restore
+  - dotnet build -c Release
+after_success:
+  - dotnet test
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: dotnet nuget push ./PdfjsSharp/bin/Release/PdfjsSharp.*.*nupkg  -k $NUGET_API -s https://api.nuget.org/v3/index.json
+  on:
+    branch: travis
