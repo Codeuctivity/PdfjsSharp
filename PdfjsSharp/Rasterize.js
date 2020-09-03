@@ -3,6 +3,7 @@
 const Canvas = require("canvas");
 const fs = require("fs");
 const pdfjsLib = require('pdfjs-dist/es5/build/pdf.js');
+const assert = require("assert");
 
 function NodeCanvasFactory() { }
 NodeCanvasFactory.prototype = {
@@ -63,4 +64,4 @@ module.exports = async (sourceFile, targetPrefix) => {
     }
 
     return pdfDocument.numPages;
-}
+};

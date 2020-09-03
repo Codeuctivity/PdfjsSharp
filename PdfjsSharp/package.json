@@ -6,7 +6,8 @@
   "dependencies": {
     "assert": "^2.0.0",
     "canvas": "^2.6.1",
-    "pdfjs-dist": "^2.4.456"
+    "pdfjs-dist": "^2.4.456",
+    "eslint": "^7.8.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/Codeuctivity/PdfjsSharp/issues"
   },
-  "homepage": "https://github.com/Codeuctivity/PdfjsSharp#readme"
+  "homepage": "https://github.com/Codeuctivity/PdfjsSharp#readme",
+  "devDependencies": {
+    "@types/pdfjs-dist": "^2.1.5"
+  }
 }

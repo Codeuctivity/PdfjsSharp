@@ -10,8 +10,10 @@ Brings Pdfjs to .net
 
 ## Dependencies
 
-get nodejs lts from <https://nodejs.org/en/download/>
-.net core 3.1 runtime
+get
+
+- nodejs lts from <https://nodejs.org/en/download/>
+- .net core 3.1 runtime
 
 ## Howto use
 
