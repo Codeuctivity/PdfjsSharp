@@ -8,10 +8,10 @@
     <PackageTags>Pdf Png</PackageTags>
     <Authors>Stefan Seeland</Authors>
     <Company>Codeuctivity</Company>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
-    <Version>1.0.2</Version>
-    <PackageVersion>1.0.2-prerelease</PackageVersion>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
+    <Version>1.0.3</Version>
+    <PackageVersion>1.0.3-prerelease</PackageVersion>
     <PackageIcon>NugetIcon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/Codeuctivity/PdfjsSharp</PackageProjectUrl>
     <Description>Pdfjs for .net</Description>
@@ -30,16 +30,6 @@
     <AssemblyName>Codeuctivity.PdfjsSharp</AssemblyName>
     <RootNamespace>Codeuctivity.PdfjsSharp</RootNamespace>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Rasterize.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Rasterize.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Jering.Javascript.NodeJS" Version="5.4.3" />
@@ -65,6 +55,18 @@
     <Content Include="node_modules\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Rasterize.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Rasterize.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
   <Target Name="NpmInstall" BeforeTargets="Build" Condition="!Exists('$(ProjectDir)node_modules')">

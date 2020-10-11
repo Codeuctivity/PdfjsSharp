@@ -1,12 +1,13 @@
 ﻿using Jering.Javascript.NodeJS;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 
-namespace PdfjsSharp
+namespace Codeuctivity
 {
     /// <summary>
-    /// Rasterizes PDFs
+    /// Rasterizes PDFs, Depands on node
     /// </summary>
     public static class Rasterize
     {
@@ -18,9 +19,13 @@ namespace PdfjsSharp
         /// <returns>Collection of paths to pngs for each page in the pdf</returns>
         public static async Task<IReadOnlyList<string>> ConvertToPngAsync(string pathToPdf, string pathToPngOutput)
         {
+            var assembly = Assembly.GetExecutingAssembly();
+            var stream = assembly.GetManifestResourceStream("Codeuctivity.PdfjsSharp.Rasterize.js");
+            using var reader = new StreamReader(stream);
+            var pdfRasterizerJsPath = reader.ReadToEnd();
+
             var pathsToPngOfEachPage = new List<string>();
             // Invoke javascript in Node.js
-            var pdfRasterizerJsPath = File.ReadAllText("Rasterize.js");
             var pageQuantiy = await StaticNodeJSService.InvokeFromStringAsync<int>(pdfRasterizerJsPath, args: new object[] { pathToPdf, pathToPngOutput }).ConfigureAwait(false);
 
             for (var pagenumber = 1; pagenumber <= pageQuantiy; pagenumber++)
