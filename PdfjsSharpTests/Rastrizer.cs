@@ -17,7 +17,7 @@ namespace PdfjsSharpTests
 
             Assert.Equal(1, actualImages.Count);
             Assert.True(ImageSharpCompare.ImageAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"));
-            Directory.Delete(actualImagePath, true);
+            File.Delete(actualImages.Single());
         }
     }
 }

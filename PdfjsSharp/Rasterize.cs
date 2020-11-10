@@ -111,7 +111,14 @@ namespace Codeuctivity
 
             if (disposing && !useCustomNodeModulePath && Directory.Exists(pathToNodeModules))
             {
-                Directory.Delete(pathToNodeModules, true);
+                try
+                {
+                    Directory.Delete(pathToNodeModules, true);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    //TODO do something smarter than ignoring
+                }
             }
             disposed = true;
         }
