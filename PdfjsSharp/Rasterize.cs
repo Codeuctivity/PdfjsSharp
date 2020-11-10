@@ -100,7 +100,7 @@ namespace Codeuctivity
         }
 
         /// <summary>
-        /// Disposing ghostscript bins
+        /// Disposing packaged node_moduels folder
         /// </summary>
         protected virtual void Dispose(bool disposing)
         {
