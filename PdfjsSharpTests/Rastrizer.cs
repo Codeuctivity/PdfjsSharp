@@ -12,7 +12,7 @@ namespace PdfjsSharpTests
         public async Task ShouldCreatePngFromPdf()
         {
             var actualImagePath = Path.Combine(Path.GetTempPath(), "ActualShouldCreatePngFromPdf");
-            var actualImages = await Rasterize.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
+            var actualImages = await new Rasterize().ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
 
             Assert.Equal(1, actualImages.Count);
             Assert.True(ImageSharpCompare.ImageAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"));

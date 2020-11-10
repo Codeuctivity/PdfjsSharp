@@ -51,11 +51,11 @@
     <None Include="NugetIcon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <Content Include="node_modules\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <None Remove="Rasterize.js" />
@@ -63,6 +63,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Rasterize.js" />
+    <EmbeddedResource Include="node_modules.zip" />
   </ItemGroup>
 
   <ItemGroup>
