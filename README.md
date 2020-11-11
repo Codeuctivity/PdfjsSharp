@@ -26,6 +26,10 @@ var actualImages = await PdfjsSharp.Rasterize.ConvertToPngAsync("pathToSome.pdf"
 
 - "actualImages" will give a collection of paths to the rendered pages stored as png
 
+### Linux
+
+Tested with node v10.19.0, if you have problems try to install v10.19.0
+
 ## Development
 
 ### Windows
