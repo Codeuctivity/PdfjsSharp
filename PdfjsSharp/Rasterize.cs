@@ -15,7 +15,7 @@ namespace Codeuctivity
     /// </summary>
     public class Rasterize : IRasterize
     {
-        private const int someMaxPathLenth = 206;
+        private const int someMaxPathLength = 206;
         private bool disposed;
         private bool useCustomNodeModulePath;
         private static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
@@ -42,9 +42,9 @@ namespace Codeuctivity
 
             var pathsToPngOfEachPage = new List<string>();
 
-            var pageQuantiy = await StaticNodeJSService.InvokeFromStringAsync<int>(pdfRasterizerJsCodeToExecute, args: new object[] { pathToPdf, pathToPngOutput }).ConfigureAwait(false);
+            var pageQuantity = await StaticNodeJSService.InvokeFromStringAsync<int>(pdfRasterizerJsCodeToExecute, args: new object[] { pathToPdf, pathToPngOutput }).ConfigureAwait(false);
 
-            for (var pagenumber = 1; pagenumber <= pageQuantiy; pagenumber++)
+            for (var pagenumber = 1; pagenumber <= pageQuantity; pagenumber++)
             {
                 pathsToPngOfEachPage.Add($"{pathToPngOutput}{pagenumber}.png");
             }
@@ -65,7 +65,7 @@ namespace Codeuctivity
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     pathToNodeModules = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-                    if (pathToNodeModules.Length > someMaxPathLenth)
+                    if (pathToNodeModules.Length > someMaxPathLength)
                     {
                         throw new PathTooLongException(pathToNodeModules);
                     }
@@ -75,9 +75,16 @@ namespace Codeuctivity
 
                     pathToNodeModules = pathToNodeModules.Replace("\\", "/") + "/node_modules/";
                 }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    pathToNodeModules = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                    Directory.CreateDirectory(pathToNodeModules);
+                    await ExtractBinaryFromManifest("Codeuctivity.PdfjsSharp.node_modules.linux.zip").ConfigureAwait(false);
+
+                    pathToNodeModules = pathToNodeModules + "/node_modules/";
+                }
                 else
                 {
-                    // TODO implement packaged node_modules for other os, use globaly installed canvas in the mean time
                     pathToNodeModules = string.Empty;
                     useCustomNodeModulePath = true;
                 }
@@ -91,7 +98,7 @@ namespace Codeuctivity
         }
 
         /// <summary>
-        /// Disposing packaged node_moduels folder
+        /// Disposing packaged node_modules folder
         /// </summary>
         public void Dispose()
         {
@@ -100,7 +107,7 @@ namespace Codeuctivity
         }
 
         /// <summary>
-        /// Disposing packaged node_moduels folder
+        /// Disposing packaged node_modules folder
         /// </summary>
         protected virtual void Dispose(bool disposing)
         {
