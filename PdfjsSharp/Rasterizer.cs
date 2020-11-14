@@ -62,6 +62,10 @@ namespace Codeuctivity
                     return;
                 }
 
+                // Steps to create node_modules.*.zip
+                // 1. npm install --production
+                // 2. Zip the created node_modules folder
+
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     pathToNodeModules = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
