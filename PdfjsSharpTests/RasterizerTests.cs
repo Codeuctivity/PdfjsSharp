@@ -11,8 +11,8 @@ namespace Codeuctivity.PdfjsSharpTests
         public async Task ShouldCreatePngFromPdf()
         {
             var actualImagePath = Path.Combine(Path.GetTempPath(), "ActualShouldCreatePngFromPdf");
-            using var rasterize = new Rasterize();
-            var actualImages = await rasterize.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
+            using var rasterizer = new Rasterizer();
+            var actualImages = await rasterizer.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
 
             Assert.Equal(1, actualImages.Count);
             Assert.True(ImageSharpCompare.ImageAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"));

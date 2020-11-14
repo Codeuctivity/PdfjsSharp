@@ -13,7 +13,7 @@ namespace Codeuctivity
     /// <summary>
     /// Rasterizes PDFs, Depands on node
     /// </summary>
-    public class Rasterize : IRasterize
+    public class Rasterizer : IRasterizer
     {
         private const int someMaxPathLength = 206;
         private bool disposed;

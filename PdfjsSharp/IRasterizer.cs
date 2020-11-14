@@ -7,7 +7,7 @@ namespace Codeuctivity
     /// <summary>
     /// Rasterizes PDFs, Depands on node
     /// </summary>
-    public interface IRasterize : IDisposable
+    public interface IRasterizer  : IDisposable
     {
         /// <summary>
         /// Converts a pdf to pngs

@@ -1,0 +1,41 @@
+version: 1.0.{build}
+image:
+  - Ubuntu
+  - Visual Studio 2019
+skip_tags: true
+configuration: Release
+before_build:
+  - ps: >-
+      nuget restore
+
+build:
+  project: PdfjsSharp.sln
+  publish_nuget: true
+  publish_nuget_symbols: true
+  use_snupkg_format: true
+  verbosity: minimal
+
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: "{version}"
+  package_version: "{version}"
+  assembly_version: "{version}"
+  file_version: "{version}"
+  informational_version: "{version}"
+
+artifacts:
+  - path: '**\PdfjsSharp.*.*nupkg'
+
+deploy:
+- provider: NuGet
+  api_key:
+    secure: BAGacXk+5m7jd8EvWW6wkYhoVml39WAi7n2Z0odVUKUq5SeWLqixvkPA1I+KbQ1r
+  on:
+    branch: master
+  skip_symbols: false
+- provider: GitHub
+  auth_token:
+    secure: 6WIcUQnv2ZAHI7MaJeiopONTvv3TxZiaThY17jVC4tJTnva7F66tPqvCWX2kQRyM
+  on:
+    branch: master
