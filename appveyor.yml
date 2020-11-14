@@ -3,8 +3,6 @@ image:
   - Ubuntu
   - Visual Studio 2019
 skip_tags: true
-environment:
-  nodejs_version: "10"
 configuration: Release
 before_build:
   - ps: >-
@@ -22,9 +20,7 @@ test_script:
   - node --version
   - npm --version
 
-install:
-  # Get the latest stable version of Node.js or io.js
-  - ps: Install-Product node $env:nodejs_version
+stack: node 10
 
 dotnet_csproj:
   patch: true
