@@ -6,7 +6,7 @@ skip_tags: true
 configuration: Release
 before_build:
   - ps: >-
-      nuget restore
+      dotnet restore;nuget restore
 
 build:
   project: PdfjsSharp.sln
@@ -14,11 +14,6 @@ build:
   publish_nuget_symbols: true
   use_snupkg_format: true
   verbosity: minimal
-
-test_script:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
 
 stack: node 10
 
