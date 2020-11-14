@@ -17,6 +17,15 @@ build:
   use_snupkg_format: true
   verbosity: minimal
 
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+
+install:
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
