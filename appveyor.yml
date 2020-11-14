@@ -3,6 +3,8 @@ image:
   - Ubuntu
   - Visual Studio 2019
 skip_tags: true
+environment:
+  nodejs_version: "10"
 configuration: Release
 before_build:
   - ps: >-
