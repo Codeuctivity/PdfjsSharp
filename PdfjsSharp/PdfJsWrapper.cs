@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Codeuctivity
+namespace Codeuctivity.PdfjsSharp
 {
     /// <summary>
     /// Wraps pdfjs boilerplaiting

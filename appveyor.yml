@@ -1,6 +1,4 @@
 version: 1.0.{build}
-environment:
-  nodejs_version: "12"
 image:
   - Ubuntu
   - Visual Studio 2019
@@ -11,7 +9,7 @@ before_build:
       dotnet restore;nuget restore
 
 install:
-  - cmd: Install-Product node '12' x64
+  - ps: nvm use 8
   - ps: node --version
   - ps: node -p "process.arch"
   - ps: npm --version
@@ -22,8 +20,6 @@ build:
   publish_nuget_symbols: true
   use_snupkg_format: true
   verbosity: minimal
-
-stack: node 10
 
 dotnet_csproj:
   patch: true

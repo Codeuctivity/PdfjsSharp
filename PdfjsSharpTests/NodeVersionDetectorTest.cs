@@ -1,4 +1,5 @@
 using System;
+using Codeuctivity.PdfjsSharp;
 using Xunit;
 
 namespace Codeuctivity.PdfjsSharpTests
