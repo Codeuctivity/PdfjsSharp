@@ -1,6 +1,7 @@
 # PdfjsSharp
 
-[![Nuget](https://img.shields.io/nuget/v/PdfjsSharp.svg)](https://www.nuget.org/packages/PdfjsSharp/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c417a8e923da45ed90c302c4a23528ea)](https://www.codacy.com/gh/Codeuctivity/PdfjsSharp?utm_source=github.com&utm_medium=referral&utm_content=Codeuctivity/PdfjsSharp&utm_campaign=Badge_Grade)[![Build Status](https://travis-ci.com/Codeuctivity/PdfjsSharp.svg?branch=travis)](https://travis-ci.com/Codeuctivity/PdfjsSharp)
+[![Nuget](https://img.shields.io/nuget/v/PdfjsSharp.svg)](https://www.nuget.org/packages/PdfjsSharp/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c417a8e923da45ed90c302c4a23528ea)](https://www.codacy.com/gh/Codeuctivity/PdfjsSharp?utm_source=github.com&utm_medium=referral&utm_content=Codeuctivity/PdfjsSharp&utm_campaign=Badge_Grade) [![Build status](https://ci.appveyor.com/api/projects/status/f5f4mvh98eqkjanp/branch/master?svg=true)](https://ci.appveyor.com/project/stesee/pdfjssharp/branch/master)
+[![Build Status](https://travis-ci.com/Codeuctivity/PdfjsSharp.svg?branch=master)](https://travis-ci.com/Codeuctivity/PdfjsSharp)
 
 Brings Pdfjs to .net
 
@@ -21,11 +22,11 @@ get
 
 ### Linux dependency
 
-Tested with node v10.19.0, if you have problems try to install v10.19.0
+Tested with node v10.19.0, if you have problems try to install v10.19.0 . Thats the current version used in the apt package on Ubuntu 20.04.
 
 ### Windows dependency
 
-Tested with node 8 and node 12.
+Tested with node 12. Node 8 should also work.
 
 ```Csharp
 using var rasterize = new Rasterize();

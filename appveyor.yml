@@ -1,5 +1,6 @@
 version: 1.0.{build}
 environment:
+  # Windows specific setting
   nodejs_version: "12"
 image:
   - Ubuntu
@@ -11,6 +12,7 @@ before_build:
       dotnet restore;nuget restore
 
 install:
+  # Windows specific setting
   - ps: if ($IsWindows -or $ENV:OS) { Install-Product node '12' x64 } 
   - ps: node --version
   - ps: node -p "process.arch"
@@ -23,6 +25,7 @@ build:
   use_snupkg_format: true
   verbosity: minimal
 
+# Linux specific setting
 stack: node 10
 
 dotnet_csproj:
