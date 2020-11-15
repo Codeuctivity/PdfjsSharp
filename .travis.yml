@@ -15,4 +15,4 @@ deploy:
   provider: script
   script: dotnet nuget push ./PdfjsSharp/bin/Release/PdfjsSharp.*.*nupkg  -k $NUGET_API -s https://api.nuget.org/v3/index.json --skip-duplicate
   on:
-    branch: master
+    branch: travis

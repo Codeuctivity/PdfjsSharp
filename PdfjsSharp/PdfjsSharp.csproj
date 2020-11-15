@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/Codeuctivity/PdfjsSharp</RepositoryUrl>
@@ -17,6 +16,7 @@
     <Description>Pdfjs for .net</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>$(APPVEYOR_REPO_COMMIT_MESSAGE)</PackageReleaseNotes>
     <AssemblyOriginatorKeyFile>PdfjsSharp.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <IncludeSymbols>true</IncludeSymbols>
@@ -65,7 +65,8 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Rasterize.js" />
-    <EmbeddedResource Include="node_modules.win.zip" />
+    <EmbeddedResource Include="node_modules.win.node8.zip" />
+    <EmbeddedResource Include="node_modules.win.node12.zip" />
     <EmbeddedResource Include="node_modules.linux.zip" />
   </ItemGroup>
 
@@ -73,13 +74,4 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
-  <Target Name="NpmInstall" BeforeTargets="Build" Condition="!Exists('$(ProjectDir)node_modules')">
-    <!--TODO package node_modules.win.zip-->
-    <Exec WorkingDirectory="$(ProjectDir)" Command="npm install --production" />
-  </Target>
-
-  <Target Name="DropNodeModules" AfterTargets="Clean">
-    <RemoveDir Directories="$(ProjectDir)node_modules" />
-    <Exec WorkingDirectory="$(ProjectDir)" Command="npm install --production" />
-  </Target>
 </Project>

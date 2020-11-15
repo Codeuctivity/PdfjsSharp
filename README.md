@@ -1,6 +1,7 @@
 # PdfjsSharp
 
-[![Nuget](https://img.shields.io/nuget/v/PdfjsSharp.svg)](https://www.nuget.org/packages/PdfjsSharp/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c417a8e923da45ed90c302c4a23528ea)](https://www.codacy.com/gh/Codeuctivity/PdfjsSharp?utm_source=github.com&utm_medium=referral&utm_content=Codeuctivity/PdfjsSharp&utm_campaign=Badge_Grade)[![Build Status](https://travis-ci.com/Codeuctivity/PdfjsSharp.svg?branch=travis)](https://travis-ci.com/Codeuctivity/PdfjsSharp)
+[![Nuget](https://img.shields.io/nuget/v/PdfjsSharp.svg)](https://www.nuget.org/packages/PdfjsSharp/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c417a8e923da45ed90c302c4a23528ea)](https://www.codacy.com/gh/Codeuctivity/PdfjsSharp?utm_source=github.com&utm_medium=referral&utm_content=Codeuctivity/PdfjsSharp&utm_campaign=Badge_Grade) [![Build status](https://ci.appveyor.com/api/projects/status/f5f4mvh98eqkjanp/branch/master?svg=true)](https://ci.appveyor.com/project/stesee/pdfjssharp/branch/master)
+[![Build Status](https://travis-ci.com/Codeuctivity/PdfjsSharp.svg?branch=master)](https://travis-ci.com/Codeuctivity/PdfjsSharp)
 
 Brings Pdfjs to .net
 
@@ -13,22 +14,26 @@ Brings Pdfjs to .net
 get
 
 - nodejs lts from <https://nodejs.org/en/download/>
-- .net core 3.1 runtime
+- .NET Framework 4.6.1 or .NET Core 2.0 or [something newer](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 
 ## Howto use
 
-- Install nuget package
-- Use it
+- Install nuget package [PdfjsSharp](https://www.nuget.org/packages/PdfjsSharp/)
+
+### Linux dependency
+
+Tested with node v10.19.0, if you have problems try to install v10.19.0 . Thats the current version used in the apt package on Ubuntu 20.04.
+
+### Windows dependency
+
+Tested with node 12. Node 8 should also work.
 
 ```Csharp
-var actualImages = await PdfjsSharp.Rasterize.ConvertToPngAsync("pathToSome.pdf", "somePathToAOutputLocation");
+using var rasterize = new Rasterize();
+var pathsToImages = await rasterize.ConvertToPngAsync("./SourceTest.pdf", "./DestinationTest");
 ```
 
-- "actualImages" will give a collection of paths to the rendered pages stored as png
-
-### Linux
-
-Tested with node v10.19.0, if you have problems try to install v10.19.0
+- "pathsToImages" will give a collection of paths to the rendered pages stored as png. E.g. DestinationTest1.png .
 
 ## Development
 
