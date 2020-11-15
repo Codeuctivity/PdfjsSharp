@@ -11,7 +11,7 @@ before_build:
       dotnet restore;nuget restore
 
 install:
-  - cmd: if ($IsWindows -or $ENV:OS) { Install-Product node '12' x64 } 
+  - ps: if ($IsWindows -or $ENV:OS) { Install-Product node '12' x64 } 
   - ps: node --version
   - ps: node -p "process.arch"
   - ps: npm --version
