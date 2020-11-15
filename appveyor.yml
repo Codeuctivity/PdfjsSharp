@@ -11,10 +11,10 @@ before_build:
       dotnet restore;nuget restore
 
 install:
-  - ps: Install-Product node '12' x64
-  - cmd: node --version
-  - cmd: node -p "process.arch"
-  - cmd: npm --version
+  - cmd: Install-Product node '12' x64
+  - ps: node --version
+  - ps: node -p "process.arch"
+  - ps: npm --version
 
 build:
   project: PdfjsSharp.sln
