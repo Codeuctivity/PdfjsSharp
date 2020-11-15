@@ -1,11 +1,7 @@
 ﻿using Jering.Javascript.NodeJS;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Codeuctivity
@@ -13,16 +9,8 @@ namespace Codeuctivity
     /// <summary>
     /// Rasterizes PDFs, Depands on node
     /// </summary>
-    public class Rasterizer : IRasterizer
+    public class Rasterizer : PdfJsWrapper, IRasterizer
     {
-        private const int someMaxPathLength = 206;
-        private bool disposed;
-        private bool useCustomNodeModulePath;
-        private static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
-
-        private bool IsInitialized { get; set; }
-        private string pathToNodeModules = default!;
-
         /// <summary>
         /// Converts a pdf to pngs
         /// </summary>
@@ -50,102 +38,6 @@ namespace Codeuctivity
             }
 
             return pathsToPngOfEachPage.AsReadOnly();
-        }
-
-        private async Task InitNodeModules()
-        {
-            await semaphore.WaitAsync().ConfigureAwait(false);
-            try
-            {
-                if (IsInitialized)
-                {
-                    return;
-                }
-
-                // Steps to create node_modules.*.zip
-                // 1. npm install --production
-                // 2. Zip the created node_modules folder
-
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    pathToNodeModules = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-                    if (pathToNodeModules.Length > someMaxPathLength)
-                    {
-                        throw new PathTooLongException(pathToNodeModules);
-                    }
-
-                    Directory.CreateDirectory(pathToNodeModules);
-                    await ExtractBinaryFromManifest("Codeuctivity.PdfjsSharp.node_modules.win.zip").ConfigureAwait(false);
-
-                    pathToNodeModules = pathToNodeModules.Replace("\\", "/") + "/node_modules/";
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    pathToNodeModules = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-                    Directory.CreateDirectory(pathToNodeModules);
-                    await ExtractBinaryFromManifest("Codeuctivity.PdfjsSharp.node_modules.linux.zip").ConfigureAwait(false);
-
-                    pathToNodeModules = pathToNodeModules + "/node_modules/";
-                }
-                else
-                {
-                    pathToNodeModules = string.Empty;
-                    useCustomNodeModulePath = true;
-                }
-
-                IsInitialized = true;
-            }
-            finally
-            {
-                semaphore.Release();
-            }
-        }
-
-        /// <summary>
-        /// Disposing packaged node_modules folder
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Disposing packaged node_modules folder
-        /// </summary>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-            {
-                return;
-            }
-
-            if (disposing && !useCustomNodeModulePath && Directory.Exists(pathToNodeModules))
-            {
-                try
-                {
-                    Directory.Delete(pathToNodeModules, true);
-                }
-                catch (UnauthorizedAccessException)
-                {
-                    //TODO do something smarter than ignoring
-                }
-            }
-            disposed = true;
-        }
-
-        private async Task ExtractBinaryFromManifest(string resourceName)
-        {
-            var pathNodeModules = Path.Combine(pathToNodeModules, "node_modules.zip");
-            var assembly = Assembly.GetExecutingAssembly();
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
-            using (var fileStream = File.Create(pathNodeModules))
-            {
-                stream.Seek(0, SeekOrigin.Begin);
-                await stream.CopyToAsync(fileStream).ConfigureAwait(false);
-            }
-
-            ZipFile.ExtractToDirectory(pathNodeModules, pathToNodeModules);
         }
     }
 }

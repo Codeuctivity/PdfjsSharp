@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Codeuctivity
@@ -7,7 +6,7 @@ namespace Codeuctivity
     /// <summary>
     /// Rasterizes PDFs, Depands on node
     /// </summary>
-    public interface IRasterizer  : IDisposable
+    public interface IRasterizer
     {
         /// <summary>
         /// Converts a pdf to pngs
