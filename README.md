@@ -13,22 +13,26 @@ Brings Pdfjs to .net
 get
 
 - nodejs lts from <https://nodejs.org/en/download/>
-- .net core 3.1 runtime
+- .NET Framework 4.6.1 or .NET Core 2.0 or [something newer](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 
 ## Howto use
 
-- Install nuget package
-- Use it
+- Install nuget package [PdfjsSharp](https://www.nuget.org/packages/PdfjsSharp/)
 
-```Csharp
-var actualImages = await PdfjsSharp.Rasterize.ConvertToPngAsync("pathToSome.pdf", "somePathToAOutputLocation");
-```
-
-- "actualImages" will give a collection of paths to the rendered pages stored as png
-
-### Linux
+### Linux dependency
 
 Tested with node v10.19.0, if you have problems try to install v10.19.0
+
+### Windows dependency
+
+Tested with node 8 and node 12.
+
+```Csharp
+using var rasterize = new Rasterize();
+var pathsToImages = await rasterize.ConvertToPngAsync("./SourceTest.pdf", "./DestinationTest");
+```
+
+- "pathsToImages" will give a collection of paths to the rendered pages stored as png. E.g. DestinationTest1.png .
 
 ## Development
 
