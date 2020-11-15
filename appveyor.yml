@@ -10,6 +10,7 @@ before_build:
   - ps: >-
       dotnet restore;nuget restore
 
+install:
   - ps: Install-Product node '12' x64
   - cmd: node --version
   - cmd: node -p "process.arch"
