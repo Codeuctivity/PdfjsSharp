@@ -20,6 +20,13 @@ get
 
 - Install nuget package [PdfjsSharp](https://www.nuget.org/packages/PdfjsSharp/)
 
+```Csharp
+using var rasterizer = new Rasterizer();
+var actualImages = await rasterizer.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
+Assert.Equal(1, actualImages.Count);
+Assert.True(ImageSharpCompare.ImageAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"));
+```
+
 ### Linux dependency
 
 Tested with node v10.19.0, if you have problems try to install v10.19.0 . Thats the current version used in the apt package on Ubuntu 20.04.
@@ -28,18 +35,11 @@ Tested with node v10.19.0, if you have problems try to install v10.19.0 . Thats 
 
 Tested with node 12. Node 8 should also work.
 
-```Csharp
-using var rasterize = new Rasterize();
-var pathsToImages = await rasterize.ConvertToPngAsync("./SourceTest.pdf", "./DestinationTest");
-```
-
-- "pathsToImages" will give a collection of paths to the rendered pages stored as png. E.g. DestinationTest1.png .
-
 ## Development
 
 ### Windows
 
-Visual Studio 2019 or .net Core Sdk 3.1
+Visual Studio 2019 (16.8+) or .net Sdk 5
 
 ### Ubuntu 20.04
 
@@ -50,6 +50,5 @@ sudo dpkg -i packages-microsoft-prod.deb
 sudo apt update
 sudo apt install apt-transport-https
 sudo apt update
-sudo apt install dotnet-sdk-3.1
-sudo apt install nodejs npm -y
+sudo apt install dotnet-sdk-5.0 nodejs npm -y
 ```
