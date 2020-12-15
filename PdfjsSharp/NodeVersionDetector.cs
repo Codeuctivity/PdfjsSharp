@@ -38,6 +38,26 @@ namespace Codeuctivity.PdfjsSharp
         }
 
         /// <summary>
+        /// Reads installed node bittness version
+        /// </summary>
+        public static string DetectBittness()
+        {
+            using var process = new Process();
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.FileName = "node";
+            process.StartInfo.Arguments = "-p \"process.arch\"";
+            process.Start();
+            process.WaitForExit();
+
+            if (process.ExitCode != 0)
+            {
+                return string.Empty;
+            }
+
+            return process.StandardOutput.ReadToEnd().Trim();
+        }
+
+        /// <summary>
         /// Check that node with majorNodeVersion is installed
         /// </summary>
         /// <param name="supportedMajorNodeVersions"></param>
@@ -48,6 +68,11 @@ namespace Codeuctivity.PdfjsSharp
             if (foundMajorVersion == null)
             {
                 throw new NotSupportedException($"No supported node version found. Expected node {supportedMajorNodeVersions} to be installed.");
+            }
+
+            if (DetectBittness() != "x64")
+            {
+                throw new NotSupportedException($"No supported node version found. Expected 64bit node to be installed.");
             }
 
             if (supportedMajorNodeVersions.Any(_ => _ == foundMajorVersion))

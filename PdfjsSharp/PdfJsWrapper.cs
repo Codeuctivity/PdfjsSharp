@@ -64,12 +64,6 @@ namespace Codeuctivity.PdfjsSharp
                     return;
                 }
 
-                // Steps to create node_modules.*.zip
-                // 1. nvm use 8
-                // 2. rm -R .\node_modules\
-                // 3. npm install --production
-                // 4. Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node8.zip
-
                 pathToNodeModules = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
 
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))

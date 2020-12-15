@@ -1,5 +1,5 @@
-using System;
 using Codeuctivity.PdfjsSharp;
+using System;
 using Xunit;
 
 namespace Codeuctivity.PdfjsSharpTests
@@ -25,6 +25,13 @@ namespace Codeuctivity.PdfjsSharpTests
         {
             var exception = Assert.Throws<NotSupportedException>(() => NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 9999 }));
             Assert.Contains(" Expected a supported node version 9999 to be installed.", exception.Message);
+        }
+
+        [Fact]
+        public void ShouldDetectNodeBittnes()
+        {
+            var detectedBittnes = NodeVersionDetector.DetectBittness();
+            Assert.Equal("x64", detectedBittnes);
         }
     }
 }
