@@ -1,7 +1,7 @@
 # PdfjsSharp
 
 [![Nuget](https://img.shields.io/nuget/v/PdfjsSharp.svg)](https://www.nuget.org/packages/PdfjsSharp/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c417a8e923da45ed90c302c4a23528ea)](https://www.codacy.com/gh/Codeuctivity/PdfjsSharp?utm_source=github.com&utm_medium=referral&utm_content=Codeuctivity/PdfjsSharp&utm_campaign=Badge_Grade) [![Build status](https://ci.appveyor.com/api/projects/status/f5f4mvh98eqkjanp/branch/master?svg=true)](https://ci.appveyor.com/project/stesee/pdfjssharp/branch/master)
-[![Build Status](https://travis-ci.com/Codeuctivity/PdfjsSharp.svg?branch=master)](https://travis-ci.com/Codeuctivity/PdfjsSharp)
+[![Build Status](https://travis-ci.com/Codeuctivity/PdfjsSharp.svg?branch=master)](https://travis-ci.com/Codeuctivity/PdfjsSharp) [![Donate](https://img.shields.io/static/v1?label=Paypal&message=Donate&color=informational)](https://www.paypal.com/donate?hosted_button_id=7M7UFMMRTS7UE)
 
 Brings Pdfjs to .net
 
@@ -13,7 +13,9 @@ Brings Pdfjs to .net
 
 get
 
-- nodejs lts from <https://nodejs.org/en/download/>
+- nodejs from <https://nodejs.org/en/download/>
+  - Windows - node 12 x64 or node 8 x64
+  - Linux - node 10 x64
 - .NET Framework 4.6.1 or .NET Core 2.0 or [something newer](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 
 ## Howto use
@@ -39,7 +41,14 @@ Tested with node 12. Node 8 should also work.
 
 ### Windows
 
-Visual Studio 2019 (16.8+) or .net Sdk 5
+Visual Studio 2019 (16.8+) or .net 5 SDK
+
+#### Steps to upate node_modules.win.*.zip
+
+```Powershell
+nvm use 8;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node8.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node8.zip
+nvm use 12;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node12.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node12.zip
+```
 
 ### Ubuntu 20.04
 
