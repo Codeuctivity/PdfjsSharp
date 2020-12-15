@@ -3,12 +3,15 @@
         "Codacy",
         "Codeuctivity",
         "PDFs",
+        "Pdfjs",
         "Rasterize",
         "Rasterizer",
         "Rasterizes",
         "Xunit",
         "dpkg",
         "nuget",
-        "pngs"
+        "nupkg",
+        "pngs",
+        "snupkg"
     ]
 }

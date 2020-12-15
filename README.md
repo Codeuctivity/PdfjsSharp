@@ -43,7 +43,7 @@ Tested with node 12. Node 8 should also work.
 
 Visual Studio 2019 (16.8+) or .net 5 SDK
 
-#### Steps to upate node_modules.win.*.zip
+#### Steps to upate node_modules.win.\*.zip
 
 ```Powershell
 nvm use 8;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node8.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node8.zip
@@ -53,6 +53,7 @@ nvm use 12;rm -R .\node_modules\; npm install --production;rm .\node_modules.win
 ### Ubuntu 20.04
 
 ```bash
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 sudo snap remove dotnet-sdk
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
@@ -60,4 +61,11 @@ sudo apt update
 sudo apt install apt-transport-https
 sudo apt update
 sudo apt install dotnet-sdk-5.0 nodejs npm -y
+echo export DOTNET_CLI_TELEMETRY_OPTOUT=1>> ~/.bash_profile
+```
+
+#### Steps to upate node_modules.linux.\*.zip
+
+```Powershell
+rm -R .\node_modules\ || npm install --production && rm node_modules.linux.zip && zip -r node_modules.linux.zip node_modules
 ```
