@@ -45,10 +45,10 @@ deploy:
   api_key:
     secure: CTISdGCfnpyC7Rh5vs1pgbuISrkWF34sot0SyVgvu0HQxhNNd+V0Gc4MS+rtJttB
   on:
-    branch: master
+    branch: main
   skip_symbols: false
 - provider: GitHub
   auth_token:
     secure: 6WIcUQnv2ZAHI7MaJeiopONTvv3TxZiaThY17jVC4tJTnva7F66tPqvCWX2kQRyM
   on:
-    branch: master
+    branch: main
