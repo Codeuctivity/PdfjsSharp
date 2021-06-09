@@ -45,6 +45,7 @@ Visual Studio 2019 (16.8+) or .net 5 SDK
 #### Steps to upate node_modules.win.\*.zip
 
 ```Powershell
+cd .\PdfjsSharp\
 nvm use 8;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node8.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node8.zip
 nvm use 12;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node12.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node12.zip
 ```
