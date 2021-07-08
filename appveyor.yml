@@ -37,9 +37,6 @@ dotnet_csproj:
   file_version: "{version}"
   informational_version: "{version}"
 
-artifacts:
-  - path: '**\PdfjsSharp.*.*nupkg'
-
 deploy:
 - provider: NuGet
   api_key:
