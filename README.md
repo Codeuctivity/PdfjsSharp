@@ -42,7 +42,7 @@ Tested with node 12. Node 8 should also work.
 
 Visual Studio 2019 (16.8+) or .net 5 SDK
 
-#### Steps to upate node_modules.win.\*.zip
+#### Steps to update node_modules.win.\*.zip
 
 ```Powershell
 cd .\PdfjsSharp\

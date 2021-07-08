@@ -5,9 +5,9 @@
   "main": "Rasterize.js",
   "dependencies": {
     "assert": "^2.0.0",
-    "canvas": "^2.6.1",
-    "pdfjs-dist": "^2.4.456",
-    "eslint": "^7.8.1"
+    "canvas": "^2.8.0",
+    "eslint": "^7.30.0",
+    "pdfjs-dist": "^2.8.335"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/Codeuctivity/PdfjsSharp#readme",
   "devDependencies": {
-    "@types/pdfjs-dist": "^2.1.5"
+    "@types/pdfjs-dist": "^2.7.4"
   }
 }
