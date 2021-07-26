@@ -17,6 +17,7 @@ namespace Codeuctivity.PdfjsSharp
         internal static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
         internal bool useCustomNodeModulePath;
         internal string pathToNodeModules = default!;
+        internal string pathToTempFolder = default!;
         private bool disposed;
 
         internal bool IsInitialized { get; set; }
@@ -40,11 +41,11 @@ namespace Codeuctivity.PdfjsSharp
                 return;
             }
 
-            if (disposing && !useCustomNodeModulePath && Directory.Exists(pathToNodeModules))
+            if (disposing && !useCustomNodeModulePath && Directory.Exists(pathToTempFolder))
             {
                 try
                 {
-                    Directory.Delete(pathToNodeModules, true);
+                    Directory.Delete(pathToTempFolder, true);
                 }
                 catch (UnauthorizedAccessException)
                 {
@@ -64,29 +65,29 @@ namespace Codeuctivity.PdfjsSharp
                     return;
                 }
 
-                pathToNodeModules = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                pathToTempFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
 
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    if (pathToNodeModules.Length > someMaxPathLength)
+                    if (pathToTempFolder.Length > someMaxPathLength)
                     {
-                        throw new PathTooLongException(pathToNodeModules);
+                        throw new PathTooLongException(pathToTempFolder);
                     }
                     var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 12 });
 
-                    Directory.CreateDirectory(pathToNodeModules);
+                    Directory.CreateDirectory(pathToTempFolder);
 
                     await ExtractBinaryFromManifest($"Codeuctivity.PdfjsSharp.node_modules.win.node{foundVersion}.zip").ConfigureAwait(false);
 
-                    pathToNodeModules = pathToNodeModules.Replace("\\", "/") + "/node_modules/";
+                    pathToNodeModules = pathToTempFolder.Replace("\\", "/") + "/node_modules/";
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
                     NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 10 });
-                    Directory.CreateDirectory(pathToNodeModules);
+                    Directory.CreateDirectory(pathToTempFolder);
                     await ExtractBinaryFromManifest("Codeuctivity.PdfjsSharp.node_modules.linux.zip").ConfigureAwait(false);
 
-                    pathToNodeModules = pathToNodeModules + "/node_modules/";
+                    pathToNodeModules = pathToTempFolder + "/node_modules/";
                 }
                 else
                 {
@@ -104,7 +105,7 @@ namespace Codeuctivity.PdfjsSharp
 
         private async Task ExtractBinaryFromManifest(string resourceName)
         {
-            var pathNodeModules = Path.Combine(pathToNodeModules, "node_modules.zip");
+            var pathNodeModules = Path.Combine(pathToTempFolder, "node_modules.zip");
             var assembly = Assembly.GetExecutingAssembly();
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var fileStream = File.Create(pathNodeModules))
@@ -113,7 +114,7 @@ namespace Codeuctivity.PdfjsSharp
                 await stream.CopyToAsync(fileStream).ConfigureAwait(false);
             }
 
-            ZipFile.ExtractToDirectory(pathNodeModules, pathToNodeModules);
+            ZipFile.ExtractToDirectory(pathNodeModules, pathToTempFolder);
         }
     }
 }

@@ -3,7 +3,7 @@
 
 const Canvas = require("MagicPrefixcanvas");
 const fs = require("fs");
-const pdfjsLib = require("MagicPrefixpdfjs-dist/legacy/build/pdf.js");
+const pdfjsLib = require("MagicPrefixpdfjs-dist/es5/build/pdf.js");
 const assert = require("MagicPrefixassert");
 
 function NodeCanvasFactory() { }
