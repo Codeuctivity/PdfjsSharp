@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="ImageSharpCompare" Version="1.1.34" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.25.0.33663">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.26.0.34506">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
