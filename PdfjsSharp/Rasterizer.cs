@@ -22,7 +22,7 @@ namespace Codeuctivity.PdfjsSharp
             await InitNodeModules().ConfigureAwait(false);
             var assembly = Assembly.GetExecutingAssembly();
             var stream = assembly.GetManifestResourceStream("Codeuctivity.PdfjsSharp.Rasterize.js");
-            using var reader = new StreamReader(stream);
+            using var reader = new StreamReader(stream!);
             var script = reader.ReadToEnd();
 
             var scriptWithAbsolutePathsToNodeModules = script.Replace("MagicPrefix", pathToNodeModules);

@@ -57,6 +57,7 @@
 
 
   <ItemGroup>
+    <None Remove="node_modules.win.node14.zip" />
     <None Remove="Rasterize.js" />
   </ItemGroup>
 
@@ -64,11 +65,13 @@
     <EmbeddedResource Include="Rasterize.js" />
     <EmbeddedResource Include="node_modules.win.node8.zip" />
     <EmbeddedResource Include="node_modules.win.node12.zip" />
+    <EmbeddedResource Include="node_modules.win.node14.zip" />
     <EmbeddedResource Include="node_modules.linux.zip" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
+
 
 </Project>

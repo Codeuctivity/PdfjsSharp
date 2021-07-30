@@ -49,7 +49,7 @@ namespace Codeuctivity.PdfjsSharp
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    //TODO do something smarter than ignoring
+                    // Deleting of temp files in case of missing permissions will be ignored
                 }
             }
             disposed = true;
@@ -73,7 +73,7 @@ namespace Codeuctivity.PdfjsSharp
                     {
                         throw new PathTooLongException(pathToTempFolder);
                     }
-                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 12 });
+                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 12, 14 });
 
                     Directory.CreateDirectory(pathToTempFolder);
 
@@ -110,7 +110,7 @@ namespace Codeuctivity.PdfjsSharp
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var fileStream = File.Create(pathNodeModules))
             {
-                stream.Seek(0, SeekOrigin.Begin);
+                stream!.Seek(0, SeekOrigin.Begin);
                 await stream.CopyToAsync(fileStream).ConfigureAwait(false);
             }
 
