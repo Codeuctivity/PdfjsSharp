@@ -46,6 +46,6 @@ deploy:
   skip_symbols: false
 - provider: GitHub
   auth_token:
-    secure: 6WIcUQnv2ZAHI7MaJeiopONTvv3TxZiaThY17jVC4tJTnva7F66tPqvCWX2kQRyM
+    secure: 428XyVIsAyC1KRK+j9oLSHngL6xpka8aPikV28GBJgQ4XoWDFr7BLBfeCjW+Yr12
   on:
     branch: main
