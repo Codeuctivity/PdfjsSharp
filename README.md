@@ -14,7 +14,7 @@ Brings Pdfjs to .net
 get
 
 - nodejs from <https://nodejs.org/en/download/>
-  - Windows - node 12 x64 or node 8 x64
+  - Windows - node node 8, 12 or 14 x64
   - Linux - node 10 x64
 - .NET Framework 4.6.1 or .NET Core 2.0 or [something newer](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 
@@ -42,12 +42,13 @@ Tested with node 12. Node 8 should also work.
 
 Visual Studio 2019 (16.8+) or .net 5 SDK
 
-#### Steps to upate node_modules.win.\*.zip
+#### Steps to update node_modules.win.\*.zip
 
 ```Powershell
 cd .\PdfjsSharp\
 nvm use 8;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node8.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node8.zip
 nvm use 12;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node12.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node12.zip
+nvm use 14;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node14.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node14.zip
 ```
 
 ### Ubuntu 20.04

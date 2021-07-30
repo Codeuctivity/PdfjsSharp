@@ -38,7 +38,7 @@ namespace Codeuctivity.PdfjsSharp
         }
 
         /// <summary>
-        /// Reads installed node bittness version
+        /// Reads installed node bitness version
         /// </summary>
         public static string DetectBittness()
         {

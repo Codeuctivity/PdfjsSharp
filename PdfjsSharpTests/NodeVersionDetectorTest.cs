@@ -16,7 +16,7 @@ namespace Codeuctivity.PdfjsSharpTests
         [Fact]
         public void ShouldSuccescullyDetermineInstalledVersion()
         {
-            var actualInstalledVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 10, 12 });
+            var actualInstalledVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 10, 12, 14 });
             Assert.True(actualInstalledVersion > 6);
         }
 
