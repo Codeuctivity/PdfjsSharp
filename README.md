@@ -65,7 +65,7 @@ sudo apt install dotnet-sdk-5.0 nodejs npm -y
 echo export DOTNET_CLI_TELEMETRY_OPTOUT=1>> ~/.bash_profile
 ```
 
-#### Steps to upate node_modules.linux.\*.zip
+#### Steps to update node_modules.linux.\*.zip
 
 ```Powershell
 rm -R .\node_modules\ || npm install --production && rm node_modules.linux.zip && zip -r node_modules.linux.zip node_modules
