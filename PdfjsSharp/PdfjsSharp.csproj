@@ -33,7 +33,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jering.Javascript.NodeJS" Version="6.0.1" />
+    <PackageReference Include="Jering.Javascript.NodeJS" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
