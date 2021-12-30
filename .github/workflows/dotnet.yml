@@ -48,7 +48,7 @@ jobs:
           dotnet nuget push ./PdfjsSharp/bin/Release/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_TOKEN}} --source https://api.nuget.org/v3/index.json
     - uses: papeloto/action-zip@v1
       with:
-          files: ./PdfjsSharp/bin/Release/net6.0/publish/
+          files: ./PdfjsSharp/bin/Release/
           dest: PdfjsSharp.zip
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
