@@ -73,7 +73,7 @@ namespace Codeuctivity.PdfjsSharp
                     {
                         throw new PathTooLongException(pathToTempFolder);
                     }
-                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 12, 14 });
+                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 12, 14 });
 
                     Directory.CreateDirectory(pathToTempFolder);
 
