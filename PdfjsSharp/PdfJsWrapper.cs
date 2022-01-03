@@ -83,9 +83,9 @@ namespace Codeuctivity.PdfjsSharp
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
-                    NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 10, 12, 14 });
+                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 10, 12, 14 });
                     Directory.CreateDirectory(pathToTempFolder);
-                    await ExtractBinaryFromManifest("Codeuctivity.PdfjsSharp.node_modules.linux.zip").ConfigureAwait(false);
+                    await ExtractBinaryFromManifest($"Codeuctivity.PdfjsSharp.node_modules.linux.node{foundVersion}.zip").ConfigureAwait(false);
 
                     pathToNodeModules = pathToTempFolder + "/node_modules/";
                 }
