@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/Codeuctivity/PdfjsSharp</RepositoryUrl>
@@ -63,10 +63,11 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="Rasterize.js" />
-		<EmbeddedResource Include="node_modules.win.node8.zip" />
+		<EmbeddedResource Include="node_modules.linux.node10.zip" />
+		<EmbeddedResource Include="node_modules.linux.node12.zip" />
+		<EmbeddedResource Include="node_modules.linux.node14.zip" />
 		<EmbeddedResource Include="node_modules.win.node12.zip" />
 		<EmbeddedResource Include="node_modules.win.node14.zip" />
-		<EmbeddedResource Include="node_modules.linux.zip" />
 	</ItemGroup>
 
 	<ItemGroup>
