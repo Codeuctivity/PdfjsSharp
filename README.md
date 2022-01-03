@@ -13,8 +13,7 @@ Brings Pdfjs to .net
 get
 
 - NodeJs
-  - Windows - node 12 or 14 x64
-  - Linux - node 10 x64
+  - node 12 or 14 x64
 - .NET Framework 4.6.1 or .NET Core 2.0 or [something newer](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 
 ## Howto use
@@ -26,14 +25,6 @@ using var rasterizer = new Rasterizer();
 var actualImages = await rasterizer.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
 Assert.Equal(1, actualImages.Count);
 ```
-
-### Linux dependency
-
-Tested with node v10.19.0, if you have problems try to install v10.19.0 . Thats the current version used in the apt package on Ubuntu 20.04.
-
-### Windows dependency
-
-Tested with node 14.
 
 ## Development
 
@@ -59,12 +50,14 @@ sudo dpkg -i packages-microsoft-prod.deb
 sudo apt update
 sudo apt install apt-transport-https
 sudo apt update
-sudo apt install dotnet-sdk-6.0 nodejs npm -y
+sudo apt install dotnet-sdk-6.0 -y
 echo export DOTNET_CLI_TELEMETRY_OPTOUT=1>> ~/.bash_profile
+nvm use 12
 ```
 
 #### Steps to update node_modules.linux.\*.zip
 
-```Powershell
-rm -R .\node_modules\ || npm install --production && rm node_modules.linux.zip && zip -r node_modules.linux.zip node_modules
+```bash
+nvm use 12;rm -R ./node_modules/ || npm install --production && rm node_modules.linux.node12.zip && zip -r node_modules.linux.node12.zip node_modules
+nvm use 14;rm -R ./node_modules/ || npm install --production && rm node_modules.linux.node14.zip && zip -r node_modules.linux.node14.zip node_modules
 ```
