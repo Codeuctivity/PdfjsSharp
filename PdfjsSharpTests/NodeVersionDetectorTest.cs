@@ -1,5 +1,6 @@
 using Codeuctivity.PdfjsSharp;
 using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Codeuctivity.PdfjsSharpTests
@@ -7,23 +8,23 @@ namespace Codeuctivity.PdfjsSharpTests
     public class NodeVersionDetectorTest
     {
         [Fact]
-        public void ShouldDetectNodeVersion()
+        public async Task ShouldDetectNodeVersionAsync()
         {
-            var actualInstalledVersion = NodeVersionDetector.DetectVersion();
+            var actualInstalledVersion = await NodeVersionDetector.DetectVersionAsync();
             Assert.True(actualInstalledVersion.Major > 6);
         }
 
         [Fact]
-        public void ShouldSuccescullyDetermineInstalledVersion()
+        public async Task ShouldSuccescullyDetermineInstalledVersionAsync()
         {
-            var actualInstalledVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 10, 12, 14 });
+            var actualInstalledVersion = await NodeVersionDetector.CheckRequiredNodeVersionInstalledAsync(new[] { 8, 16, 14 });
             Assert.True(actualInstalledVersion > 6);
         }
 
         [Fact]
-        public void ShouldThrowOnMissingNodeVersion()
+        public async Task ShouldThrowOnMissingNodeVersion()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 9999 }));
+            var exception = await Assert.ThrowsAsync<NotSupportedException>(() => NodeVersionDetector.CheckRequiredNodeVersionInstalledAsync(new[] { 9999 }));
             Assert.Contains(" Expected a supported node version 9999 to be installed.", exception.Message);
         }
 

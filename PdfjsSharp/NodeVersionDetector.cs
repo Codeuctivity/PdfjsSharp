@@ -1,7 +1,9 @@
+using Jering.Javascript.NodeJS;
 using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Codeuctivity.PdfjsSharp
 {
@@ -13,28 +15,17 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Reads installed node version
         /// </summary>
-        public static Version? DetectVersion()
+        public static async Task<Version?> DetectVersionAsync()
         {
-            using var process = new Process();
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.FileName = "node";
-            process.StartInfo.Arguments = "-v";
-            process.Start();
-            process.WaitForExit();
+            var result = await StaticNodeJSService.InvokeFromStringAsync<string>("module.exports = (callback) => callback(null, process.versions.node);").ConfigureAwait(false);
 
-            if (process.ExitCode != 0)
-            {
-                return null;
-            }
+            var splitUpResult = result?.Split('.');
 
-            var nodeCallResult = process.StandardOutput.ReadToEnd();
-            var splitUpResult = nodeCallResult.Substring(1).Split('.');
-
-            if (int.TryParse(splitUpResult[0], out var majorVersion) && int.TryParse(splitUpResult[1], out var minorVersion) && int.TryParse(splitUpResult[2], out var buildVersion))
+            if (int.TryParse(splitUpResult?[0], out var majorVersion) && int.TryParse(splitUpResult?[1], out var minorVersion) && int.TryParse(splitUpResult?[2], out var buildVersion))
             {
                 return new Version(majorVersion, minorVersion, buildVersion);
             }
-            throw new NotSupportedException($"Failed to parse 'node -v' response {nodeCallResult}. Expected 'vX.X.X.X'.");
+            throw new NotSupportedException($"Failed to parse 'process.versions.node' response {result}. Expected 'vX.X.X.X'.");
         }
 
         /// <summary>
@@ -61,9 +52,9 @@ namespace Codeuctivity.PdfjsSharp
         /// Check that node with majorNodeVersion is installed
         /// </summary>
         /// <param name="supportedMajorNodeVersions"></param>
-        public static int CheckRequiredNodeVersionInstalled(int[] supportedMajorNodeVersions)
+        public static async Task<int> CheckRequiredNodeVersionInstalledAsync(int[] supportedMajorNodeVersions)
         {
-            var foundMajorVersion = DetectVersion()?.Major;
+            var foundMajorVersion = (await DetectVersionAsync())?.Major;
 
             if (foundMajorVersion == null)
             {

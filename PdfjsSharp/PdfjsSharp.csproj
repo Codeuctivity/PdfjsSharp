@@ -14,7 +14,7 @@
 	<PackageVersion>$(Version)</PackageVersion>
 	<PackageIcon>NugetIcon.png</PackageIcon>
 	<PackageProjectUrl>https://github.com/Codeuctivity/PdfjsSharp</PackageProjectUrl>
-	<Description>Pdfjs for .net</Description>
+	<Description>PDFjs for .net</Description>
 	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 	<PackageReleaseNotes>$(LAST_COMMIT_MESSAGE)</PackageReleaseNotes>
 	<AssemblyOriginatorKeyFile>PdfjsSharp.snk</AssemblyOriginatorKeyFile>
@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.33.0.40503">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.36.0.43782">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -51,27 +51,28 @@
 	<ItemGroup>
 		<Content Remove="node_modules\**" />
 		<Compile Remove="node_modules\**" />
+		<Compile Remove="Properties\**" />
 		<EmbeddedResource Remove="node_modules\**" />
+		<EmbeddedResource Remove="Properties\**" />
 		<None Remove="node_modules\**" />
+		<None Remove="Properties\**" />
 	</ItemGroup>
 
 
 	<ItemGroup>
 		<None Remove="node_modules.win.node14.zip" />
+		<None Remove="node_modules.linux.node14.zip" />
+		<None Remove="node_modules.win.node16.zip" />
+		<None Remove="node_modules.linux.node16.zip" />
 		<None Remove="Rasterize.js" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<EmbeddedResource Include="Rasterize.js" />
-		<EmbeddedResource Include="node_modules.linux.node10.zip" />
-		<EmbeddedResource Include="node_modules.linux.node12.zip" />
-		<EmbeddedResource Include="node_modules.linux.node14.zip" />
-		<EmbeddedResource Include="node_modules.win.node12.zip" />
 		<EmbeddedResource Include="node_modules.win.node14.zip" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Properties\" />
+		<EmbeddedResource Include="node_modules.linux.node14.zip" />
+		<EmbeddedResource Include="node_modules.win.node16.zip" />
+		<EmbeddedResource Include="node_modules.linux.node16.zip" />
 	</ItemGroup>
 
 
