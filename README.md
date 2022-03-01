@@ -36,8 +36,8 @@ Visual Studio 2022 or .net 6 SDK
 
 ```Powershell
 cd .\PdfjsSharp\
-nvm use 14;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node14.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node14.zip
-nvm use 16;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node16.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node16.zip
+ nvm install 14;nvm use 14;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node14.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node14.zip
+ nvm install 16;nvm use 16;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node16.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node16.zip
 ```
 
 ### Ubuntu 20.04

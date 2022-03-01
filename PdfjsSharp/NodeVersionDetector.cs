@@ -1,9 +1,7 @@
-using Jering.Javascript.NodeJS;
 using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Codeuctivity.PdfjsSharp
 {
@@ -15,17 +13,31 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Reads installed node version
         /// </summary>
-        public static async Task<Version?> DetectVersionAsync()
+        /// <summary>
+        /// Reads installed node version
+        /// </summary>
+        public static Version? DetectVersion()
         {
-            var result = await StaticNodeJSService.InvokeFromStringAsync<string>("module.exports = (callback) => callback(null, process.versions.node);").ConfigureAwait(false);
+            using var process = new Process();
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.FileName = "node";
+            process.StartInfo.Arguments = "-v";
+            process.Start();
+            process.WaitForExit();
 
-            var splitUpResult = result?.Split('.');
+            if (process.ExitCode != 0)
+            {
+                return null;
+            }
 
-            if (int.TryParse(splitUpResult?[0], out var majorVersion) && int.TryParse(splitUpResult?[1], out var minorVersion) && int.TryParse(splitUpResult?[2], out var buildVersion))
+            var nodeCallResult = process.StandardOutput.ReadToEnd();
+            var splitUpResult = nodeCallResult.Substring(1).Split('.');
+
+            if (int.TryParse(splitUpResult[0], out var majorVersion) && int.TryParse(splitUpResult[1], out var minorVersion) && int.TryParse(splitUpResult[2], out var buildVersion))
             {
                 return new Version(majorVersion, minorVersion, buildVersion);
             }
-            throw new NotSupportedException($"Failed to parse 'process.versions.node' response {result}. Expected 'vX.X.X.X'.");
+            throw new NotSupportedException($"Failed to parse 'node -v' response {nodeCallResult}. Expected 'vX.X.X.X'.");
         }
 
         /// <summary>
@@ -52,9 +64,9 @@ namespace Codeuctivity.PdfjsSharp
         /// Check that node with majorNodeVersion is installed
         /// </summary>
         /// <param name="supportedMajorNodeVersions"></param>
-        public static async Task<int> CheckRequiredNodeVersionInstalledAsync(int[] supportedMajorNodeVersions)
+        public static int CheckRequiredNodeVersionInstalled(int[] supportedMajorNodeVersions)
         {
-            var foundMajorVersion = (await DetectVersionAsync())?.Major;
+            var foundMajorVersion = (DetectVersion())?.Major;
 
             if (foundMajorVersion == null)
             {
