@@ -4,20 +4,20 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/Codeuctivity/PdfjsSharp</RepositoryUrl>
-    <PackageTags>Pdf Png</PackageTags>
+    <PackageTags>PDF PNG Linux Windows</PackageTags>
     <Authors>Stefan Seeland</Authors>
     <Company>Codeuctivity</Company>
-	<Version Condition="'$(CURRENT_VERSION)' != ''">$(CURRENT_VERSION)</Version>
-	<Version Condition="'$(CURRENT_VERSION)' == ''">0.0.1</Version>
-	<AssemblyVersion>$(Version)</AssemblyVersion>
-	<FileVersion>$(Version)</FileVersion>
-	<PackageVersion>$(Version)</PackageVersion>
-	<PackageIcon>NugetIcon.png</PackageIcon>
-	<PackageProjectUrl>https://github.com/Codeuctivity/PdfjsSharp</PackageProjectUrl>
-	<Description>PDFjs for .net</Description>
-	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-	<PackageReleaseNotes>$(LAST_COMMIT_MESSAGE)</PackageReleaseNotes>
-	<AssemblyOriginatorKeyFile>PdfjsSharp.snk</AssemblyOriginatorKeyFile>
+    <Version Condition="'$(CURRENT_VERSION)' != ''">$(CURRENT_VERSION)</Version>
+    <Version Condition="'$(CURRENT_VERSION)' == ''">0.0.1</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <PackageVersion>$(Version)</PackageVersion>
+    <PackageReleaseNotes>$(LAST_COMMIT_MESSAGE)</PackageReleaseNotes>
+    <PackageIcon>NugetIcon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/Codeuctivity/PdfjsSharp</PackageProjectUrl>
+    <Description>PDFjs for .net, converts PDFs to PNGs, supports Linux and Windows</Description>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <AssemblyOriginatorKeyFile>PdfjsSharp.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -25,12 +25,18 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
-    <PackageId>PdfjsSharp</PackageId>
+    <RootNamespace>Codeuctivity.PdfjsSharp</RootNamespace>
     <Product>PdfjsSharp</Product>
     <AssemblyName>Codeuctivity.PdfjsSharp</AssemblyName>
-    <RootNamespace>Codeuctivity.PdfjsSharp</RootNamespace>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <PackageId>Codeuctivity.PdfjsSharp</PackageId>
+    <PackageReadmeFile>nugetReadme.md</PackageReadmeFile>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="docs\nugetReadme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Jering.Javascript.NodeJS" Version="6.3.0" />
@@ -38,42 +44,42 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.36.0.43782">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.36.1.44192">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
-	<ItemGroup>
-		<None Include="NugetIcon.png" Pack="true" PackagePath="\" />
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="NugetIcon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Content Remove="node_modules\**" />
-		<Compile Remove="node_modules\**" />
-		<Compile Remove="Properties\**" />
-		<EmbeddedResource Remove="node_modules\**" />
-		<EmbeddedResource Remove="Properties\**" />
-		<None Remove="node_modules\**" />
-		<None Remove="Properties\**" />
-	</ItemGroup>
+  <ItemGroup>
+    <Content Remove="node_modules\**" />
+    <Compile Remove="node_modules\**" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="node_modules\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="node_modules\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
 
 
-	<ItemGroup>
-		<None Remove="node_modules.win.node14.zip" />
-		<None Remove="node_modules.linux.node14.zip" />
-		<None Remove="node_modules.win.node16.zip" />
-		<None Remove="node_modules.linux.node16.zip" />
-		<None Remove="Rasterize.js" />
-	</ItemGroup>
+  <ItemGroup>
+    <None Remove="node_modules.win.node14.zip" />
+    <None Remove="node_modules.linux.node14.zip" />
+    <None Remove="node_modules.win.node16.zip" />
+    <None Remove="node_modules.linux.node16.zip" />
+    <None Remove="Rasterize.js" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<EmbeddedResource Include="Rasterize.js" />
-		<EmbeddedResource Include="node_modules.win.node14.zip" />
-		<EmbeddedResource Include="node_modules.linux.node14.zip" />
-		<EmbeddedResource Include="node_modules.win.node16.zip" />
-		<EmbeddedResource Include="node_modules.linux.node16.zip" />
-	</ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rasterize.js" />
+    <EmbeddedResource Include="node_modules.win.node14.zip" />
+    <EmbeddedResource Include="node_modules.linux.node14.zip" />
+    <EmbeddedResource Include="node_modules.win.node16.zip" />
+    <EmbeddedResource Include="node_modules.linux.node16.zip" />
+  </ItemGroup>
 
 
 </Project>

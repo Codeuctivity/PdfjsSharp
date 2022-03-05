@@ -2,7 +2,7 @@ using Codeuctivity.PdfjsSharp;
 using System;
 using Xunit;
 
-namespace Codeuctivity.PdfjsSharpTests
+namespace PdfjsSharpTests
 {
     public class NodeVersionDetectorTest
     {
