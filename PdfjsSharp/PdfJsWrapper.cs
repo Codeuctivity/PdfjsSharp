@@ -73,7 +73,7 @@ namespace Codeuctivity.PdfjsSharp
                     {
                         throw new PathTooLongException(pathToTempFolder);
                     }
-                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 12, 14 });
+                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 14, 16 });
 
                     Directory.CreateDirectory(pathToTempFolder);
 
@@ -83,7 +83,7 @@ namespace Codeuctivity.PdfjsSharp
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
-                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 10, 12, 14 });
+                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 14, 16 });
                     Directory.CreateDirectory(pathToTempFolder);
                     await ExtractBinaryFromManifest($"Codeuctivity.PdfjsSharp.node_modules.linux.node{foundVersion}.zip").ConfigureAwait(false);
 

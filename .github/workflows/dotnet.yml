@@ -1,6 +1,6 @@
 name: .NET build and test
 env:
-  CURRENT_VERSION: 1.1.${{ github.run_number }}
+  CURRENT_VERSION: 1.2.${{ github.run_number }}
   LAST_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
 
 on:
@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
-        node: ['12', '14']
+        node: ['14', '16']
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET

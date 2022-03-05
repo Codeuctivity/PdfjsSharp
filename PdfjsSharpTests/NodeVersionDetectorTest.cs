@@ -2,21 +2,21 @@ using Codeuctivity.PdfjsSharp;
 using System;
 using Xunit;
 
-namespace Codeuctivity.PdfjsSharpTests
+namespace PdfjsSharpTests
 {
     public class NodeVersionDetectorTest
     {
         [Fact]
-        public void ShouldDetectNodeVersion()
+        public void ShouldDetectNodeVersionAsync()
         {
             var actualInstalledVersion = NodeVersionDetector.DetectVersion();
             Assert.True(actualInstalledVersion.Major > 6);
         }
 
         [Fact]
-        public void ShouldSuccescullyDetermineInstalledVersion()
+        public void ShouldSuccescullyDetermineInstalledVersionAsync()
         {
-            var actualInstalledVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 10, 12, 14 });
+            var actualInstalledVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 16, 14 });
             Assert.True(actualInstalledVersion > 6);
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Codeuctivity
+namespace Codeuctivity.PdfjsSharp
 {
     /// <summary>
     /// Rasterizes PDFs, Depands on node

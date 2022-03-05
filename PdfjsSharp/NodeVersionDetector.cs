@@ -13,6 +13,9 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Reads installed node version
         /// </summary>
+        /// <summary>
+        /// Reads installed node version
+        /// </summary>
         public static Version? DetectVersion()
         {
             using var process = new Process();
@@ -63,7 +66,7 @@ namespace Codeuctivity.PdfjsSharp
         /// <param name="supportedMajorNodeVersions"></param>
         public static int CheckRequiredNodeVersionInstalled(int[] supportedMajorNodeVersions)
         {
-            var foundMajorVersion = DetectVersion()?.Major;
+            var foundMajorVersion = (DetectVersion())?.Major;
 
             if (foundMajorVersion == null)
             {

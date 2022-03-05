@@ -3,26 +3,29 @@
 
 const Canvas = require("MagicPrefixcanvas");
 const fs = require("fs");
-const pdfjsLib = require("MagicPrefixpdfjs-dist/es5/build/pdf.js");
+const pdfjsLib = require("MagicPrefixpdfjs-dist/legacy/build/pdf.min.js");
 const assert = require("MagicPrefixassert");
 
 function NodeCanvasFactory() { }
 NodeCanvasFactory.prototype = {
-    create: function NodeCanvasFactoryCreate(width, height) {
+    create: function NodeCanvasFactory_create(width, height) {
         assert(width > 0 && height > 0, "Invalid canvas size");
-        var canvas = Canvas.createCanvas(width, height);
-        var context = canvas.getContext("2d");
-        return { canvas, context };
+        const canvas = Canvas.createCanvas(width, height);
+        const context = canvas.getContext("2d");
+        return {
+            canvas,
+            context,
+        };
     },
 
-    reset: function NodeCanvasFactoryReset(canvasAndContext, width, height) {
+    reset: function NodeCanvasFactory_reset(canvasAndContext, width, height) {
         assert(canvasAndContext.canvas, "Canvas is not specified");
         assert(width > 0 && height > 0, "Invalid canvas size");
         canvasAndContext.canvas.width = width;
         canvasAndContext.canvas.height = height;
     },
 
-    destroy: function NodeCanvasFactoryDestroy(canvasAndContext) {
+    destroy: function NodeCanvasFactory_destroy(canvasAndContext) {
         assert(canvasAndContext.canvas, "Canvas is not specified");
 
         // Zeroing the width and height cause Firefox to release graphics
@@ -39,14 +42,19 @@ module.exports = async (sourceFile, targetPrefix) => {
     const data = new Uint8Array(fs.readFileSync(sourceFile));
 
     // Some PDFs need external cmaps.
-    const CMAP_URL = "./node_modules/pdfjs-dist/cmaps/";
+    const CMAP_URL = "MagicPrefixpdfjs-dist/cmaps/";
     const CMAP_PACKED = true;
+
+    // Where the standard fonts are located.
+    const STANDARD_FONT_DATA_URL =
+        "MagicPrefixpdfjs-dist/standard_fonts/";
 
     // Load the PDF file.
     const pdfDocument = await pdfjsLib.getDocument({
         data,
         CMAP_URL,
         CMAP_PACKED,
+        standardFontDataUrl: STANDARD_FONT_DATA_URL,
     }).promise;
 
     const canvasFactory = new NodeCanvasFactory();
