@@ -1,6 +1,6 @@
 # PDFjsSharp
 
-[![Nuget](https://img.shields.io/nuget/v/PdfjsSharp.svg)](https://www.nuget.org/packages/PdfjsSharp/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c417a8e923da45ed90c302c4a23528ea)](https://www.codacy.com/gh/Codeuctivity/PdfjsSharp?utm_source=github.com&utm_medium=referral&utm_content=Codeuctivity/PdfjsSharp&utm_campaign=Badge_Grade) [![Build](https://github.com/Codeuctivity/PdfjsSharp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Codeuctivity/PdfjsSharp/actions/workflows/dotnet.yml) [![Donate](https://img.shields.io/static/v1?label=Paypal&message=Donate&color=informational)](https://www.paypal.com/donate?hosted_button_id=7M7UFMMRTS7UE)
+[![Nuget](https://img.shields.io/nuget/v/Codeuctivity.PdfjsSharp.svg)](https://www.nuget.org/packages/Codeuctivity.PdfjsSharp/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c417a8e923da45ed90c302c4a23528ea)](https://www.codacy.com/gh/Codeuctivity/PdfjsSharp?utm_source=github.com&utm_medium=referral&utm_content=Codeuctivity/PdfjsSharp&utm_campaign=Badge_Grade) [![Build](https://github.com/Codeuctivity/PdfjsSharp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Codeuctivity/PdfjsSharp/actions/workflows/dotnet.yml) [![Donate](https://img.shields.io/static/v1?label=Paypal&message=Donate&color=informational)](https://www.paypal.com/donate?hosted_button_id=7M7UFMMRTS7UE)
 
 Brings Pdfjs to .net
 
@@ -18,7 +18,7 @@ get
 
 ## Howto use
 
-- Install nuget package [PdfjsSharp](https://www.nuget.org/packages/PdfjsSharp/)
+- Install nuget package [PdfjsSharp](https://www.nuget.org/packages/Codeuctivity.PdfjsSharp/)
 
 ```Csharp
 using var rasterizer = new Rasterizer();
@@ -63,6 +63,12 @@ nvm install 16
 #### Steps to update node_modules.linux.\*.zip
 
 ```bash
-nvm use 14;rm -R ./node_modules/ || npm install --production && rm node_modules.linux.node14.zip && zip -r node_modules.linux.node14.zip node_modules
-nvm use 16;rm -R ./node_modules/ || npm install --production && rm node_modules.linux.node16.zip && zip -r node_modules.linux.node16.zip node_modules
+nvm install 16
+nvm install 14
+nvm use 14
+rm -R ./node_modules/ 
+npm install --production && rm node_modules.linux.node14.zip && zip -r node_modules.linux.node14.zip node_modules
+nvm use 16
+rm -R ./node_modules/ 
+npm install --production && rm node_modules.linux.node16.zip && zip -r node_modules.linux.node16.zip node_modules
 ```
