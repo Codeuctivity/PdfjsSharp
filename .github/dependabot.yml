@@ -17,3 +17,4 @@ updates:
       - dependency-name: "MSTest.TestFramework"
       - dependency-name: "ImageSharpCompare"
       - dependency-name: "Microsoft.SourceLink.GitHub"
+      - dependency-name: "Codeuctivity.ImageSharpCompare"
