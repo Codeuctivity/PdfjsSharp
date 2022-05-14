@@ -1,5 +1,23 @@
 version: 2
 updates:
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: weekly
+    rebase-strategy: auto
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: weekly
+    rebase-strategy: auto
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: weekly
+    rebase-strategy: auto
+
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
@@ -17,3 +35,4 @@ updates:
       - dependency-name: "MSTest.TestFramework"
       - dependency-name: "ImageSharpCompare"
       - dependency-name: "Microsoft.SourceLink.GitHub"
+      - dependency-name: "Codeuctivity.ImageSharpCompare"
