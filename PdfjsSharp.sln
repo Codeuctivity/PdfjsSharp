@@ -8,8 +8,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A4B6C60-8306-43E3-8BDF-78B20BF5922A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.github\workflows\cla.yml = .github\workflows\cla.yml
+		.github\dependabot.yml = .github\dependabot.yml
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		Readme.md = Readme.md
+		.github\workflows\stale.yml = .github\workflows\stale.yml
 		testenvironments.json = testenvironments.json
 	EndProjectSection
 EndProject

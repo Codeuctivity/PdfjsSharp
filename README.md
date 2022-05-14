@@ -32,12 +32,18 @@ Assert.Equal(1, actualImages.Count);
 
 Visual Studio 2022 or .net 6 SDK
 
+### Upgarde npm packages
+
+- temporary remove 'MagicPrefix' from Rasterize.js
+- npx npm-check --update-all
+- revert changes in Rasterize.js
+
 #### Steps to update node_modules.win.\*.zip
 
 ```Powershell
-cd .\PdfjsSharp\
- nvm install 14;nvm use 14;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node14.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node14.zip
- nvm install 16;nvm use 16;rm -R .\node_modules\; npm install --production;rm .\node_modules.win.node16.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node16.zip
+ cd .\PdfjsSharp\
+ nvm install 14;nvm use 14;rm -R .\node_modules\;npm install --production;rm .\node_modules.win.node14.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node14.zip
+ nvm install 16;nvm use 16;rm -R .\node_modules\;npm install --production;rm .\node_modules.win.node16.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node16.zip
 ```
 
 ### Ubuntu 20.04
