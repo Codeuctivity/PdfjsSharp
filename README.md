@@ -14,6 +14,7 @@ get
 
 - NodeJs
   - node 14 or 16 x64 (older node versions are supported by older PDFjsSharp versions)
+
 - .NET Framework 4.6.1 or .NET Core 2.0 or [something newer](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 
 ## Howto use
