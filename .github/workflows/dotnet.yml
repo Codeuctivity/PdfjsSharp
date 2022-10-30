@@ -61,7 +61,7 @@ jobs:
           ./PdfjsSharp/bin/Release/*.snupkg
 
   deployTest:
-    if: github.ref != 'refs/heads/release'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: build 
     steps:
