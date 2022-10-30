@@ -13,7 +13,7 @@ Brings Pdfjs to .net
 get
 
 - NodeJs
-  - node 14 or 16 x64 (older node versions are supported by older PDFjsSharp versions)
+  - node 18 or 16 x64 (older node versions are supported by older PDFjsSharp versions)
 
 - .NET Framework 4.6.1 or .NET Core 2.0 or [something newer](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 
@@ -43,8 +43,8 @@ Visual Studio 2022 or .net 6 SDK
 
 ```Powershell
  cd .\PdfjsSharp\
- nvm install 14;nvm use 14;rm -R .\node_modules\;npm install --production;rm .\node_modules.win.node14.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node14.zip
- nvm install 16;nvm use 16;rm -R .\node_modules\;npm install --production;rm .\node_modules.win.node16.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node16.zip
+ nvm install lts;nvm use lts;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node18.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node18.zip
+ nvm install 16;nvm use 16;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node16.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node16.zip
 ```
 
 ### Ubuntu 20.04
@@ -62,20 +62,33 @@ sudo dpkg -i packages-microsoft-prod.deb
 sudo apt update
 sudo apt install apt-transport-https zip
 sudo apt update
-sudo apt install dotnet-sdk-6.0 -y
+sudo apt install dotnet-sdk-6.0 zip -y
 echo export DOTNET_CLI_TELEMETRY_OPTOUT=1>> ~/.bash_profile
 nvm install 16
 ```
 
-#### Steps to update node_modules.linux.\*.zip
+### Ubuntu 22.04
 
 ```bash
-nvm install 16
-nvm install 14
-nvm use 14
+sudo snap remove dotnet-sdk
+sudo apt remove 'dotnet*'
+sudo apt remove 'aspnetcore*'
+sudo apt remove 'netstandard*'
+sudo rm /etc/apt/sources.list.d/microsoft-prod.list
+sudo rm /etc/apt/sources.list.d/microsoft-prod.list.save
+sudo apt update
+sudo apt install dotnet6 zip
+```
+
+#### Steps to update node_modules.linux.node\*.zip
+
+```bash
+nvm install 18
+nvm use 18
 rm -R ./node_modules/ 
-npm install --production && rm node_modules.linux.node14.zip && zip -r node_modules.linux.node14.zip node_modules
+npm install --omit=dev && rm node_modules.linux.node18.zip && zip -r node_modules.linux.node18.zip node_modules
+nvm install 16
 nvm use 16
 rm -R ./node_modules/ 
-npm install --production && rm node_modules.linux.node16.zip && zip -r node_modules.linux.node16.zip node_modules
+npm install --omit=dev && rm node_modules.linux.node16.zip && zip -r node_modules.linux.node16.zip node_modules
 ```

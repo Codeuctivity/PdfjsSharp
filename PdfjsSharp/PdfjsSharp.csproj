@@ -44,7 +44,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.39.0.47922">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.47.0.55603">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -66,19 +66,19 @@
 
 
   <ItemGroup>
-    <None Remove="node_modules.win.node14.zip" />
-    <None Remove="node_modules.linux.node14.zip" />
-    <None Remove="node_modules.win.node16.zip" />
     <None Remove="node_modules.linux.node16.zip" />
+    <None Remove="node_modules.linux.node18.zip" />
+    <None Remove="node_modules.win.node16.zip" />
+    <None Remove="node_modules.win.node18.zip" />
     <None Remove="Rasterize.js" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Rasterize.js" />
-    <EmbeddedResource Include="node_modules.win.node14.zip" />
-    <EmbeddedResource Include="node_modules.linux.node14.zip" />
     <EmbeddedResource Include="node_modules.win.node16.zip" />
     <EmbeddedResource Include="node_modules.linux.node16.zip" />
+    <EmbeddedResource Include="node_modules.win.node18.zip" />
+    <EmbeddedResource Include="node_modules.linux.node18.zip" />
   </ItemGroup>
 
 
