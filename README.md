@@ -43,8 +43,8 @@ Visual Studio 2022 or .net 6 SDK
 
 ```Powershell
  cd .\PdfjsSharp\
- nvm install lts;nvm use lts;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.18.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.18.zip
- nvm install 16;nvm use 16;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.16.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.16.zip
+ nvm install lts;nvm use lts;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node18.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node18.zip
+ nvm install 16;nvm use 16;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node16.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node16.zip
 ```
 
 ### Ubuntu 20.04
@@ -62,7 +62,7 @@ sudo dpkg -i packages-microsoft-prod.deb
 sudo apt update
 sudo apt install apt-transport-https zip
 sudo apt update
-sudo apt install dotnet-sdk-6.0 -y
+sudo apt install dotnet-sdk-6.0 zip -y
 echo export DOTNET_CLI_TELEMETRY_OPTOUT=1>> ~/.bash_profile
 nvm install 16
 ```
@@ -77,18 +77,18 @@ sudo apt remove 'netstandard*'
 sudo rm /etc/apt/sources.list.d/microsoft-prod.list
 sudo rm /etc/apt/sources.list.d/microsoft-prod.list.save
 sudo apt update
-sudo apt install dotnet6
+sudo apt install dotnet6 zip
 ```
 
-#### Steps to update node_modules.linux.\*.zip
+#### Steps to update node_modules.linux.node\*.zip
 
 ```bash
-nvm install 16
-nvm install lts
-nvm use lts
+nvm install 18
+nvm use 18
 rm -R ./node_modules/ 
-npm install --production && rm node_modules.linux.18.zip && zip -r node_modules.linux.18.zip node_modules
+npm install --omit=dev && rm node_modules.linux.node18.zip && zip -r node_modules.linux.node18.zip node_modules
+nvm install 16
 nvm use 16
 rm -R ./node_modules/ 
-npm install --production && rm node_modules.linux.16.zip && zip -r node_modules.linux.16.zip node_modules
+npm install --omit=dev && rm node_modules.linux.node16.zip && zip -r node_modules.linux.node16.zip node_modules
 ```
