@@ -1,7 +1,9 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Codeuctivity.PdfjsSharp
 {
@@ -10,6 +12,71 @@ namespace Codeuctivity.PdfjsSharp
     /// </summary>
     public static class NodeVersionDetector
     {
+        public static string NodePath { get; }
+
+        static NodeVersionDetector()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                if (!string.IsNullOrEmpty(NodePath))
+                {
+                    return;
+                }
+
+                // not finding node seems to be a wsl only issue 
+
+                var filePathWhich = "/usr/bin/which";
+
+                if (File.Exists(filePathWhich))
+                {
+                    using var process = new Process();
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.FileName = filePathWhich;
+                    process.StartInfo.Arguments = "node";
+                    process.Start();
+                    process.WaitForExit();
+
+                    var detectedPath = process.StandardOutput.ReadToEnd();
+                    if (!string.IsNullOrEmpty(detectedPath) && File.Exists(detectedPath))
+                    {
+                        NodePath = detectedPath;
+                        return;
+                    }
+
+                    var home = Environment.GetEnvironmentVariable("HOME");
+
+                    var path = Path.Combine(home, ".nvm", "versions", "node");
+                    if (!string.IsNullOrEmpty(home) && Directory.Exists(path))
+                    {
+                        var installedNodeVersions = Directory.GetDirectories(path);
+
+                        var v18Directory = installedNodeVersions.FirstOrDefault(directory => Path.GetFileName(directory).StartsWith("v18"));
+                        var nodePath = Path.Combine(path, v18Directory, "bin", "node");
+                        if (File.Exists(nodePath))
+                        {
+                            NodePath = nodePath;
+
+                            //var path1 = Path.Combine(home, ".nvm", "nvm.sh");
+                            //using var process1 = new Process();
+                            //process1.StartInfo.RedirectStandardOutput = true;
+                            //process1.StartInfo.FileName = path1;
+                            ////process1.StartInfo.Arguments = "node";
+                            //process1.Start();
+                            //process1.WaitForExit();
+
+                            //var detectedPath1 = process1.StandardOutput.ReadToEnd();
+
+                            return;
+                        }
+                    }
+                }
+
+                NodePath = "node";
+                return;
+            }
+            NodePath = "node";
+        }
+
         /// <summary>
         /// Reads installed node version
         /// </summary>
@@ -20,7 +87,7 @@ namespace Codeuctivity.PdfjsSharp
         {
             using var process = new Process();
             process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.FileName = "node";
+            process.StartInfo.FileName = NodePath;
             process.StartInfo.Arguments = "-v";
             process.Start();
             process.WaitForExit();
@@ -47,7 +114,7 @@ namespace Codeuctivity.PdfjsSharp
         {
             using var process = new Process();
             process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.FileName = "node";
+            process.StartInfo.FileName = NodePath;
             process.StartInfo.Arguments = "-p \"process.arch\"";
             process.Start();
             process.WaitForExit();
