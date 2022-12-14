@@ -6,8 +6,8 @@
   "dependencies": {
     "assert": "^2.0.0",
     "canvas": "^2.10.2",
-    "eslint": "^8.26.0",
-    "pdfjs-dist": "^3.0.279"
+    "eslint": "^8.29.0",
+    "pdfjs-dist": "^3.1.81"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
