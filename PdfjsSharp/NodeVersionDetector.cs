@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -12,7 +14,8 @@ namespace Codeuctivity.PdfjsSharp
     /// </summary>
     public static class NodeVersionDetector
     {
-        public static string NodePath { get; }
+        public static string? NodePath { get; }
+        public static readonly ImmutableArray<int> SupportedNodeVersions = ImmutableArray.Create(new[] { 18, 16 });
 
         static NodeVersionDetector()
         {
@@ -22,8 +25,6 @@ namespace Codeuctivity.PdfjsSharp
                 {
                     return;
                 }
-
-                // not finding node seems to be a wsl only issue 
 
                 var filePathWhich = "/usr/bin/which";
 
@@ -43,6 +44,9 @@ namespace Codeuctivity.PdfjsSharp
                         return;
                     }
 
+                    // not finding node is a WSL only issue
+                    // known location of node installed by nvm in wsl - https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
+
                     var home = Environment.GetEnvironmentVariable("HOME");
 
                     var path = Path.Combine(home, ".nvm", "versions", "node");
@@ -50,29 +54,19 @@ namespace Codeuctivity.PdfjsSharp
                     {
                         var installedNodeVersions = Directory.GetDirectories(path);
 
-                        var v18Directory = installedNodeVersions.FirstOrDefault(directory => Path.GetFileName(directory).StartsWith("v18"));
-                        var nodePath = Path.Combine(path, v18Directory, "bin", "node");
-                        if (File.Exists(nodePath))
+                        var nodeExecutableDirectory = installedNodeVersions.FirstOrDefault(directory => SupportedNodeVersions.Any(version => Path.GetFileName(directory).StartsWith("v" + version.ToString())));
+
+                        if (nodeExecutableDirectory != null)
                         {
-                            NodePath = nodePath;
-
-                            //var path1 = Path.Combine(home, ".nvm", "nvm.sh");
-                            //using var process1 = new Process();
-                            //process1.StartInfo.RedirectStandardOutput = true;
-                            //process1.StartInfo.FileName = path1;
-                            ////process1.StartInfo.Arguments = "node";
-                            //process1.Start();
-                            //process1.WaitForExit();
-
-                            //var detectedPath1 = process1.StandardOutput.ReadToEnd();
-
-                            return;
+                            var nodePath = Path.Combine(path, nodeExecutableDirectory, "bin", "node");
+                            if (File.Exists(nodePath))
+                            {
+                                NodePath = nodePath;
+                                return;
+                            }
                         }
                     }
                 }
-
-                NodePath = "node";
-                return;
             }
             NodePath = "node";
         }
@@ -131,7 +125,7 @@ namespace Codeuctivity.PdfjsSharp
         /// Check that node with majorNodeVersion is installed
         /// </summary>
         /// <param name="supportedMajorNodeVersions"></param>
-        public static int CheckRequiredNodeVersionInstalled(int[] supportedMajorNodeVersions)
+        public static int CheckRequiredNodeVersionInstalled(IEnumerable<int> supportedMajorNodeVersions)
         {
             var foundMajorVersion = (DetectVersion())?.Major;
 

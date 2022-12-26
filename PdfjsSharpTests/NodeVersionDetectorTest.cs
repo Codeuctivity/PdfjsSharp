@@ -14,7 +14,7 @@ namespace PdfjsSharpTests
         }
 
         [Fact]
-        public void ShouldSuccescullyDetermineInstalledVersionAsync()
+        public void ShouldDetermineInstalledVersionAsync()
         {
             var actualInstalledVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(new[] { 8, 16, 18 });
             Assert.True(actualInstalledVersion > 6);
