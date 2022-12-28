@@ -14,12 +14,12 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Default ctor
         /// </summary>
-        public Rasterizer() : base()
+        public Rasterizer()
         {
         }
 
         /// <summary>
-        /// Ctor used with custom NodeExecuteablePath 
+        /// Ctor used with custom NodeExecuteablePath
         /// </summary>
         /// <param name="nodeExecuteablePath"></param>
         public Rasterizer(string nodeExecuteablePath) : base(nodeExecuteablePath)

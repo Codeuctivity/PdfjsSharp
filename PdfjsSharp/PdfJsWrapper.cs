@@ -27,7 +27,7 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Supported node versions
         /// </summary>
-        public readonly ImmutableArray<int> SupportedNodeVersions = ImmutableArray.Create(new[] { 18, 16 });
+        private readonly ImmutableArray<int> SupportedNodeVersions = ImmutableArray.Create(new[] { 18, 16 });
 
         internal bool IsInitialized { get; set; }
 
@@ -37,7 +37,7 @@ namespace Codeuctivity.PdfjsSharp
         public string NodeExecuteablePath { get; private set; }
 
         /// <summary>
-        /// Ctor used with custom NodeExecuteablePath 
+        /// Ctor used with custom NodeExecuteablePath
         /// </summary>
         /// <param name="nodeExecuteablePath"></param>
         public PdfJsWrapper(string nodeExecuteablePath)
