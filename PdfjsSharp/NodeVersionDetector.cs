@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace Codeuctivity.PdfjsSharp
 {
@@ -14,74 +11,17 @@ namespace Codeuctivity.PdfjsSharp
     /// </summary>
     public static class NodeVersionDetector
     {
-        public static string? NodePath { get; }
-        public static readonly ImmutableArray<int> SupportedNodeVersions = ImmutableArray.Create(new[] { 18, 16 });
-
-        static NodeVersionDetector()
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                if (!string.IsNullOrEmpty(NodePath))
-                {
-                    return;
-                }
-
-                var filePathWhich = "/usr/bin/which";
-
-                if (File.Exists(filePathWhich))
-                {
-                    using var process = new Process();
-                    process.StartInfo.RedirectStandardOutput = true;
-                    process.StartInfo.FileName = filePathWhich;
-                    process.StartInfo.Arguments = "node";
-                    process.Start();
-                    process.WaitForExit();
-
-                    var detectedPath = process.StandardOutput.ReadToEnd();
-                    if (!string.IsNullOrEmpty(detectedPath) && File.Exists(detectedPath))
-                    {
-                        NodePath = detectedPath;
-                        return;
-                    }
-
-                    // not finding node is a WSL only issue
-                    // known location of node installed by nvm in wsl - https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
-
-                    var home = Environment.GetEnvironmentVariable("HOME");
-
-                    var path = Path.Combine(home, ".nvm", "versions", "node");
-                    if (!string.IsNullOrEmpty(home) && Directory.Exists(path))
-                    {
-                        var installedNodeVersions = Directory.GetDirectories(path);
-
-                        var nodeExecutableDirectory = installedNodeVersions.FirstOrDefault(directory => SupportedNodeVersions.Any(version => Path.GetFileName(directory).StartsWith("v" + version.ToString())));
-
-                        if (nodeExecutableDirectory != null)
-                        {
-                            var nodePath = Path.Combine(path, nodeExecutableDirectory, "bin", "node");
-                            if (File.Exists(nodePath))
-                            {
-                                NodePath = nodePath;
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-            NodePath = "node";
-        }
-
         /// <summary>
         /// Reads installed node version
         /// </summary>
         /// <summary>
         /// Reads installed node version
         /// </summary>
-        public static Version? DetectVersion()
+        public static Version? DetectVersion(string nodeExecuteablePath)
         {
             using var process = new Process();
             process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.FileName = NodePath;
+            process.StartInfo.FileName = nodeExecuteablePath;
             process.StartInfo.Arguments = "-v";
             process.Start();
             process.WaitForExit();
@@ -104,11 +44,11 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Reads installed node bitness version
         /// </summary>
-        public static string DetectBittness()
+        public static string DetectBittness(string nodeExecuteablePath)
         {
             using var process = new Process();
             process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.FileName = NodePath;
+            process.StartInfo.FileName = nodeExecuteablePath;
             process.StartInfo.Arguments = "-p \"process.arch\"";
             process.Start();
             process.WaitForExit();
@@ -124,17 +64,18 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Check that node with majorNodeVersion is installed
         /// </summary>
+        /// <param name="nodeExecuteablePath"></param>
         /// <param name="supportedMajorNodeVersions"></param>
-        public static int CheckRequiredNodeVersionInstalled(IEnumerable<int> supportedMajorNodeVersions)
+        public static int CheckRequiredNodeVersionInstalled(string nodeExecuteablePath, IEnumerable<int> supportedMajorNodeVersions)
         {
-            var foundMajorVersion = (DetectVersion())?.Major;
+            var foundMajorVersion = (DetectVersion(nodeExecuteablePath))?.Major;
 
             if (foundMajorVersion == null)
             {
                 throw new NotSupportedException($"No supported node version found. Expected node {supportedMajorNodeVersions} to be installed.");
             }
 
-            if (DetectBittness() != "x64")
+            if (DetectBittness(nodeExecuteablePath) != "x64")
             {
                 throw new NotSupportedException($"No supported node version found. Expected 64bit node to be installed.");
             }
