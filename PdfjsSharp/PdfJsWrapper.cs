@@ -17,7 +17,7 @@ namespace Codeuctivity.PdfjsSharp
     /// </summary>
     public class PdfJsWrapper : IDisposable
     {
-        internal const int someMaxPathLength = 206;
+        internal const int windowsMaxPathLength = 206;
         internal static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
         internal bool useCustomNodeModulePath;
         internal string pathToNodeModules = default!;
@@ -113,7 +113,7 @@ namespace Codeuctivity.PdfjsSharp
 
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    if (pathToTempFolder.Length > someMaxPathLength)
+                    if (pathToTempFolder.Length > windowsMaxPathLength)
                     {
                         throw new PathTooLongException(pathToTempFolder);
                     }
@@ -132,16 +132,16 @@ namespace Codeuctivity.PdfjsSharp
                     await ExtractBinaryFromManifest($"Codeuctivity.PdfjsSharp.node_modules.linux.node{foundVersion}.zip").ConfigureAwait(false);
 
                     pathToNodeModules = pathToTempFolder + "/node_modules/";
-
-                    if (!string.IsNullOrEmpty(NodeExecuteablePath))
-                    {
-                        StaticNodeJSService.Configure<NodeJSProcessOptions>(options => options.ExecutablePath = NodeExecuteablePath);
-                    }
                 }
                 else
                 {
                     pathToNodeModules = string.Empty;
                     useCustomNodeModulePath = true;
+                }
+
+                if (!string.IsNullOrEmpty(NodeExecuteablePath) && NodeExecuteablePath != "node")
+                {
+                    StaticNodeJSService.Configure<NodeJSProcessOptions>(options => options.ExecutablePath = NodeExecuteablePath);
                 }
 
                 IsInitialized = true;
