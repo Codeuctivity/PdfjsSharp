@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -16,11 +17,11 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Reads installed node version
         /// </summary>
-        public static Version? DetectVersion()
+        public static Version? DetectVersion(string nodeExecuteablePath)
         {
             using var process = new Process();
             process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.FileName = "node";
+            process.StartInfo.FileName = nodeExecuteablePath;
             process.StartInfo.Arguments = "-v";
             process.Start();
             process.WaitForExit();
@@ -43,11 +44,11 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Reads installed node bitness version
         /// </summary>
-        public static string DetectBittness()
+        public static string DetectBittness(string nodeExecuteablePath)
         {
             using var process = new Process();
             process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.FileName = "node";
+            process.StartInfo.FileName = nodeExecuteablePath;
             process.StartInfo.Arguments = "-p \"process.arch\"";
             process.Start();
             process.WaitForExit();
@@ -63,17 +64,18 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Check that node with majorNodeVersion is installed
         /// </summary>
+        /// <param name="nodeExecuteablePath"></param>
         /// <param name="supportedMajorNodeVersions"></param>
-        public static int CheckRequiredNodeVersionInstalled(int[] supportedMajorNodeVersions)
+        public static int CheckRequiredNodeVersionInstalled(string nodeExecuteablePath, IEnumerable<int> supportedMajorNodeVersions)
         {
-            var foundMajorVersion = (DetectVersion())?.Major;
+            var foundMajorVersion = (DetectVersion(nodeExecuteablePath))?.Major;
 
             if (foundMajorVersion == null)
             {
                 throw new NotSupportedException($"No supported node version found. Expected node {supportedMajorNodeVersions} to be installed.");
             }
 
-            if (DetectBittness() != "x64")
+            if (DetectBittness(nodeExecuteablePath) != "x64")
             {
                 throw new NotSupportedException($"No supported node version found. Expected 64bit node to be installed.");
             }

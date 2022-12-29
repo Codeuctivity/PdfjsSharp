@@ -7,15 +7,27 @@ using Xunit;
 
 namespace PdfjsSharpTests
 {
-    public class RasterizerTests
+    public class RasterizerTests : NodeVersionDetectorTestFixture
     {
         [Fact]
         public async Task ShouldCreatePngFromPdf()
         {
             var actualImagePath = Path.Combine(Path.GetTempPath(), "ActualShouldCreatePngFromPdf");
-            using var rasterizer = new Rasterizer();
+            var actualImages = await Rasterizer.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
 
-            var actualImages = await rasterizer.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
+            Assert.Equal(1, actualImages.Count);
+            Assert.True(File.Exists(actualImages.Single()), "Actual output file not found");
+            Assert.True(ImageSharpCompare.ImagesAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"), "Actual and expected image do differ");
+            File.Delete(actualImages.Single());
+        }
+
+        [Fact]
+        public async Task ShouldCreatePngFromPdfCustomNodeExecutablePath()
+        {
+            var actualImagePath = Path.Combine(Path.GetTempPath(), "ActualShouldCreatePngFromPdfCustomNodeExecutablePath");
+            using var rasterizerSut = new Rasterizer(Rasterizer.NodeExecuteablePath);
+
+            var actualImages = await rasterizerSut.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
 
             Assert.Equal(1, actualImages.Count);
             Assert.True(File.Exists(actualImages.Single()), "Actual output file not found");
