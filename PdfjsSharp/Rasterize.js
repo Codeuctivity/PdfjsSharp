@@ -56,8 +56,8 @@ module.exports = async (sourceFile, targetPrefix) => {
         CMAP_PACKED,
         standardFontDataUrl: STANDARD_FONT_DATA_URL,
     }).promise;
-
     const canvasFactory = new NodeCanvasFactory();
+
     for (let pageNumber = 1; pageNumber <= pdfDocument.numPages; pageNumber++) {
         const page = await pdfDocument.getPage(pageNumber);
 
@@ -70,7 +70,6 @@ module.exports = async (sourceFile, targetPrefix) => {
         const renderContext = {
             canvasContext: canvasAndContext.context,
             viewport,
-            canvasFactory,
         };
         await page.render(renderContext).promise;
         const image = canvasAndContext.canvas.toBuffer();
