@@ -107,7 +107,7 @@ namespace Codeuctivity.PdfjsSharp
 
             try
             {
-                InitializeNodeExecuteablePath();
+                InitializeNodeExecutablePath();
 
                 pathToTempFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
 
@@ -152,7 +152,7 @@ namespace Codeuctivity.PdfjsSharp
             }
         }
 
-        private void InitializeNodeExecuteablePath()
+        private void InitializeNodeExecutablePath()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
