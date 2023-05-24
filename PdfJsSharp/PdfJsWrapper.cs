@@ -34,23 +34,23 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Path to node executable
         /// </summary>
-        public string NodeExecuteablePath { get; private set; }
+        public string NodeExecutablePath { get; private set; }
 
         /// <summary>
-        /// Ctor used with custom NodeExecuteablePath
+        /// Ctor used with custom NodeExecutablePath
         /// </summary>
-        /// <param name="nodeExecuteablePath"></param>
-        public PdfJsWrapper(string nodeExecuteablePath)
+        /// <param name="nodeExecutablePath"></param>
+        public PdfJsWrapper(string nodeExecutablePath)
         {
-            NodeExecuteablePath = nodeExecuteablePath;
+            NodeExecutablePath = nodeExecutablePath;
         }
 
         /// <summary>
-        /// Default ctor, NodeExecuteablePath gets auto detected
+        /// Default ctor, NodeExecutablePath gets auto detected
         /// </summary>
         public PdfJsWrapper()
         {
-            NodeExecuteablePath = "node";
+            NodeExecutablePath = "node";
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Codeuctivity.PdfjsSharp
                     {
                         throw new PathTooLongException(pathToTempFolder);
                     }
-                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(NodeExecuteablePath, SupportedNodeVersions);
+                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(NodeExecutablePath, SupportedNodeVersions);
 
                     Directory.CreateDirectory(pathToTempFolder);
 
@@ -127,7 +127,7 @@ namespace Codeuctivity.PdfjsSharp
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
-                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(NodeExecuteablePath, SupportedNodeVersions);
+                    var foundVersion = NodeVersionDetector.CheckRequiredNodeVersionInstalled(NodeExecutablePath, SupportedNodeVersions);
                     Directory.CreateDirectory(pathToTempFolder);
                     await ExtractBinaryFromManifest($"Codeuctivity.PdfjsSharp.node_modules.linux.node{foundVersion}.zip").ConfigureAwait(false);
 
@@ -139,9 +139,9 @@ namespace Codeuctivity.PdfjsSharp
                     useCustomNodeModulePath = true;
                 }
 
-                if (!string.IsNullOrEmpty(NodeExecuteablePath) && NodeExecuteablePath != "node")
+                if (!string.IsNullOrEmpty(NodeExecutablePath) && NodeExecutablePath != "node")
                 {
-                    StaticNodeJSService.Configure<NodeJSProcessOptions>(options => options.ExecutablePath = NodeExecuteablePath);
+                    StaticNodeJSService.Configure<NodeJSProcessOptions>(options => options.ExecutablePath = NodeExecutablePath);
                 }
 
                 IsInitialized = true;
@@ -170,7 +170,7 @@ namespace Codeuctivity.PdfjsSharp
                     var detectedPath = process.StandardOutput.ReadToEnd();
                     if (!string.IsNullOrEmpty(detectedPath) && File.Exists(detectedPath))
                     {
-                        NodeExecuteablePath = detectedPath;
+                        NodeExecutablePath = detectedPath;
                         return;
                     }
 
@@ -191,14 +191,14 @@ namespace Codeuctivity.PdfjsSharp
                             var nodePath = Path.Combine(path, nodeExecutableDirectory, "bin", "node");
                             if (File.Exists(nodePath))
                             {
-                                NodeExecuteablePath = nodePath;
+                                NodeExecutablePath = nodePath;
                                 return;
                             }
                         }
                     }
                 }
             }
-            NodeExecuteablePath = "node";
+            NodeExecutablePath = "node";
         }
 
         private async Task ExtractBinaryFromManifest(string resourceName)

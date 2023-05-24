@@ -25,7 +25,7 @@ namespace PdfJsSharpTests
         public async Task ShouldCreatePngFromPdfCustomNodeExecutablePath()
         {
             var actualImagePath = Path.Combine(Path.GetTempPath(), "ActualShouldCreatePngFromPdfCustomNodeExecutablePath");
-            using var rastirizerSut = new Rasterizer(Rasterizer.NodeExecuteablePath);
+            using var rastirizerSut = new Rasterizer(Rasterizer.NodeExecutablePath);
 
             var actualImages = await rastirizerSut.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
 
