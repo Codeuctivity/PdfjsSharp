@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfjsSharp", "PdfjsSharp\PdfjsSharp.csproj", "{42E3DA11-6E37-494E-B789-DA4B0F5997AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfJsSharp", "PdfjsSharp\PdfJsSharp.csproj", "{42E3DA11-6E37-494E-B789-DA4B0F5997AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A4B6C60-8306-43E3-8BDF-78B20BF5922A}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		testenvironments.json = testenvironments.json
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfjsSharpTests", "PdfjsSharpTests\PdfjsSharpTests.csproj", "{1CF61D5F-0DB6-4FBE-B33E-EAA041DB26CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfJsSharpTests", "PdfjsSharpTests\PdfJsSharpTests.csproj", "{1CF61D5F-0DB6-4FBE-B33E-EAA041DB26CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

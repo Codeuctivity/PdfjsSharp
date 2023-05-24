@@ -2,7 +2,7 @@ using Codeuctivity.PdfjsSharp;
 using System;
 using Xunit;
 
-namespace PdfjsSharpTests
+namespace PdfJsSharpTests
 {
     public class NodeVersionDetectorTest : NodeVersionDetectorTestFixture
     {

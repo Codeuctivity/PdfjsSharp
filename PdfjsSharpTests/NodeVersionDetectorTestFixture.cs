@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace PdfjsSharpTests
+namespace PdfJsSharpTests
 {
     public class NodeVersionDetectorTestFixture : IAsyncLifetime
     {

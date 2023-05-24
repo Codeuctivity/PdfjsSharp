@@ -27,7 +27,7 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Supported node versions
         /// </summary>
-        private readonly ImmutableArray<int> SupportedNodeVersions = ImmutableArray.Create(new[] { 18, 20 });
+        private readonly ImmutableArray<int> SupportedNodeVersions = ImmutableArray.Create(18, 20);
 
         internal bool IsInitialized { get; set; }
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace PdfjsSharpTests
+namespace PdfJsSharpTests
 {
     public class RasterizerTests : NodeVersionDetectorTestFixture
     {
@@ -25,9 +25,9 @@ namespace PdfjsSharpTests
         public async Task ShouldCreatePngFromPdfCustomNodeExecutablePath()
         {
             var actualImagePath = Path.Combine(Path.GetTempPath(), "ActualShouldCreatePngFromPdfCustomNodeExecutablePath");
-            using var rasterizerSut = new Rasterizer(Rasterizer.NodeExecuteablePath);
+            using var rastirizerSut = new Rasterizer(Rasterizer.NodeExecuteablePath);
 
-            var actualImages = await rasterizerSut.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
+            var actualImages = await rastirizerSut.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
 
             Assert.Equal(1, actualImages.Count);
             Assert.True(File.Exists(actualImages.Single()), "Actual output file not found");

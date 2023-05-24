@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PdfjsSharp\PdfjsSharp.csproj" />
+    <ProjectReference Include="..\PdfjsSharp\PdfJsSharp.csproj" />
   </ItemGroup>
 
 </Project>
