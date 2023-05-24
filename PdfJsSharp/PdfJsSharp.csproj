@@ -17,7 +17,7 @@
     <PackageProjectUrl>https://github.com/Codeuctivity/PdfjsSharp</PackageProjectUrl>
     <Description>PDFjs for .net, converts PDFs to PNGs, supports Linux and Windows</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <AssemblyOriginatorKeyFile>PdfjsSharp.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>PdfJsSharp.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
