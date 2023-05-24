@@ -1,12 +1,11 @@
-Sample - e.g. use it in your unit test to check SourceTest.pdf has one page that is equal to ExpectedShouldCreatePngFromPdf1.png:
+Sample:
 
 ```Csharp
-var actualImagePath = Path.Combine(Path.GetTempPath(), "ActualShouldCreatePngFromPdf");
-using var rasterizer = new Rasterizer();
+var outputPath = Path.Combine(Path.GetTempPath(), "OutputPathPng");
+var images = await Rasterizer.ConvertToPngAsync(@"../../../SourceTest.pdf", outputPath);
 
-var actualImages = await rasterizer.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
-
-Assert.Equal(1, actualImages.Count);
-Assert.True(File.Exists(actualImages.Single()), "Actual output file not found");
-Assert.True(ImageSharpCompare.ImagesAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"), "Actual and expected image do differ");
+Console.WriteLine($"Pages converted: {images.Count}");
+Console.WriteLine($"First page path: {images.Single()}");
+//Pages converted: 1
+//First page path: /tmp/OutputPathPng1.png
 ```
