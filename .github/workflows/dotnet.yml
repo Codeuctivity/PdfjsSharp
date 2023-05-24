@@ -49,7 +49,7 @@ jobs:
           NUGET_TOKEN_EXISTS: ${{ secrets.NUGET_TOKEN }}
       if:  env.NUGET_TOKEN_EXISTS != ''
       run: |
-          dotnet nuget push ./PdfjsSharp/bin/Release/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_TOKEN}} --source https://api.nuget.org/v3/index.json
+          dotnet nuget push ./PdfJsSharp/bin/Release/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_TOKEN}} --source https://api.nuget.org/v3/index.json
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -57,8 +57,8 @@ jobs:
         prerelease: false
         title: "Release Build"
         files: |
-          ./PdfjsSharp/bin/Release/*.nupkg
-          ./PdfjsSharp/bin/Release/*.snupkg
+          ./PdfJsSharp/bin/Release/*.nupkg
+          ./PdfJsSharp/bin/Release/*.snupkg
 
   deployTest:
     if: github.ref == 'refs/heads/main'
@@ -79,8 +79,8 @@ jobs:
           NUGET_TOKEN_EXISTS: ${{ secrets.NUGET_TEST_TOKEN }}
       if:  env.NUGET_TOKEN_EXISTS != ''
       run: |
-          ls ./PdfjsSharp/bin/Release
-          dotnet nuget push ./PdfjsSharp/bin/Release/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_TEST_TOKEN}} --source https://apiint.nugettest.org/v3/index.json
+          ls ./PdfJsSharp/bin/Release
+          dotnet nuget push ./PdfJsSharp/bin/Release/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_TEST_TOKEN}} --source https://apiint.nugettest.org/v3/index.json
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -88,5 +88,5 @@ jobs:
         prerelease: true
         title: "Prerelease Build"
         files: |
-          ./PdfjsSharp/bin/Release/*.nupkg
-          ./PdfjsSharp/bin/Release/*.snupkg
+          ./PdfJsSharp/bin/Release/*.nupkg
+          ./PdfJsSharp/bin/Release/*.snupkg
