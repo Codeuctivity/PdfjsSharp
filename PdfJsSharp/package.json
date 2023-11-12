@@ -2,11 +2,11 @@
   "name": "pdfjssharp",
   "version": "1.0.0",
   "description": "Brings pdfjs to c#",
-  "main": "Rasterize.js",
+  "type": "module",
+  "main": "Rasterize.mjs",
   "dependencies": {
-    "assert": "^2.0.0",
-    "eslint": "^8.41.0",
-    "pdfjs-dist": "^3.6.172"
+    "assert": "^2.1.0",
+    "pdfjs-dist": "^4.0.189"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Codeuctivity/PdfjsSharp#readme",
   "devDependencies": {
-    "@types/pdfjs-dist": "^2.10.378"
+    "@types/pdfjs-dist": "^2.10.378",
+    "eslint": "^8.53.0"
   }
 }

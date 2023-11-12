@@ -2,6 +2,7 @@ using Jering.Javascript.NodeJS;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -123,7 +124,7 @@ namespace Codeuctivity.PdfjsSharp
 
                     await ExtractBinaryFromManifest($"Codeuctivity.PdfjsSharp.node_modules.win.node{foundVersion}.zip").ConfigureAwait(false);
 
-                    pathToNodeModules = pathToTempFolder.Replace("\\", "/") + "/node_modules/";
+                    pathToNodeModules = "file://" + pathToTempFolder.Replace("\\", "/") + "/node_modules/";
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
@@ -184,7 +185,7 @@ namespace Codeuctivity.PdfjsSharp
                     {
                         var installedNodeVersions = Directory.GetDirectories(path);
 
-                        var nodeExecutableDirectory = installedNodeVersions.FirstOrDefault(directory => SupportedNodeVersions.Any(version => Path.GetFileName(directory).StartsWith("v" + version.ToString())));
+                        var nodeExecutableDirectory = installedNodeVersions.FirstOrDefault(directory => SupportedNodeVersions.Any(version => Path.GetFileName(directory).StartsWith("v" + version.ToString(CultureInfo.InvariantCulture), true, CultureInfo.InvariantCulture)));
 
                         if (nodeExecutableDirectory != null)
                         {
