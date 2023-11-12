@@ -61,8 +61,10 @@ nvm install 18
 nvm use 18
 rm -R ./node_modules/ 
 npm install --omit=dev && rm node_modules.linux.node18.zip && zip -r node_modules.linux.node18.zip node_modules
+zip -g node_modules.linux.node18.zip Rasterize.mjs
 nvm install 20
 nvm use 20
 rm -R ./node_modules/ 
 npm install --omit=dev && rm node_modules.linux.node20.zip && zip -r node_modules.linux.node20.zip node_modules
+zip -g node_modules.linux.node20.zip Rasterize.mjs
 ```
