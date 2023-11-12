@@ -35,18 +35,14 @@ Visual Studio 2022 or .net 6 SDK
 
 ### Upgrade npm packages
 
-- temporary remove 'MagicPrefix' from Rasterize.js
 - npx npm-check --update-all --skip-unused
-- revert changes in Rasterize.js
 
 #### Steps to update node_modules.win.\*.zip
 
 ```Powershell
  cd .\PdfjsSharp\
- nvm install lts;nvm use lts;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node18.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node18.zip
- nvm off
- #install node 20 using msi
- rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node20.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node20.zip
+ nvm install 18;nvm use 18;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node18.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node18.zip;Compress-Archive -Update .\Rasterize.mjs .\node_modules.win.node18.zip
+ nvm install lts;nvm use lts;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node20.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node20.zip;Compress-Archive -Update .\Rasterize.mjs .\node_modules.win.node20.zip
 ```
 
 ### Ubuntu 22.04
@@ -65,8 +61,10 @@ nvm install 18
 nvm use 18
 rm -R ./node_modules/ 
 npm install --omit=dev && rm node_modules.linux.node18.zip && zip -r node_modules.linux.node18.zip node_modules
+zip -g node_modules.linux.node18.zip Rasterize.mjs
 nvm install 20
 nvm use 20
 rm -R ./node_modules/ 
 npm install --omit=dev && rm node_modules.linux.node20.zip && zip -r node_modules.linux.node20.zip node_modules
+zip -g node_modules.linux.node20.zip Rasterize.mjs
 ```

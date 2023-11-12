@@ -21,14 +21,14 @@ namespace PdfJsSharpTests
         public async Task ShouldCreatePngFromPdf()
         {
             var outputPath = Path.Combine(Path.GetTempPath(), "OutputPathPng");
-            var images = await Rasterizer.ConvertToPngAsync(@"../../../SourceTest.pdf", outputPath);
+            var images = await Rasterizer.ConvertToPngAsync(Path.GetFullPath(@"../../../SourceTest.pdf"), outputPath);
 
             Console.WriteLine($"Pages converted: {images.Count}");
             Console.WriteLine($"First page path: {images.Single()}");
             //Pages converted: 1
             //First page path: /tmp/OutputPathPng1.png
 
-            Assert.Equal(1, images.Count);
+            Assert.Single( images);
             Assert.True(File.Exists(images.Single()), "Actual output file not found");
             Assert.True(ImageSharpCompare.ImagesAreEqual(images.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"), "Actual and expected image do differ");
             File.Delete(images.Single());
@@ -42,7 +42,7 @@ namespace PdfJsSharpTests
 
             var actualImages = await rastirizerSut.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
 
-            Assert.Equal(1, actualImages.Count);
+            Assert.Single(actualImages);
             Assert.True(File.Exists(actualImages.Single()), "Actual output file not found");
             Assert.True(ImageSharpCompare.ImagesAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"), "Actual and expected image do differ");
             File.Delete(actualImages.Single());

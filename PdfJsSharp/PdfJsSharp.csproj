@@ -29,6 +29,8 @@
     <Product>PdfjsSharp</Product>
     <AssemblyName>Codeuctivity.PdfjsSharp</AssemblyName>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisLevel>latest</AnalysisLevel>
     <PackageId>Codeuctivity.PdfjsSharp</PackageId>
     <PackageReadmeFile>nugetReadme.md</PackageReadmeFile>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
@@ -39,12 +41,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jering.Javascript.NodeJS" Version="6.3.1" />
+    <PackageReference Include="Jering.Javascript.NodeJS" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.0.0.68202">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.12.0.78982">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -71,11 +73,11 @@
     <None Remove="node_modules.linux.node18.zip" />
     <None Remove="node_modules.win.node20.zip" />
     <None Remove="node_modules.win.node18.zip" />
-    <None Remove="Rasterize.js" />
+    <None Remove="Rasterize.mjs" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Rasterize.js" />
+    <EmbeddedResource Include="Rasterize.mjs" />
     <EmbeddedResource Include="node_modules.win.node20.zip" />
     <EmbeddedResource Include="node_modules.linux.node20.zip" />
     <EmbeddedResource Include="node_modules.win.node18.zip" />

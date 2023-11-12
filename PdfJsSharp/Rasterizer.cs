@@ -35,18 +35,10 @@ namespace Codeuctivity.PdfjsSharp
         public async Task<IReadOnlyList<string>> ConvertToPngAsync(string pathToPdf, string pathToPngOutput)
         {
             await InitPdfJsWrapper().ConfigureAwait(false);
-            var assembly = Assembly.GetExecutingAssembly();
-            var stream = assembly.GetManifestResourceStream("Codeuctivity.PdfjsSharp.Rasterize.js");
-            using var reader = new StreamReader(stream!);
-            var script = reader.ReadToEnd();
-
-            var scriptWithAbsolutePathsToNodeModules = script.Replace("MagicPrefix", pathToNodeModules);
-            var pdfRasterizerJsCodeToExecute = scriptWithAbsolutePathsToNodeModules;
+            var pathToRasterizeJs = Path.Combine(pathToTempFolder, "Rasterize.mjs");
 
             var pathsToPngOfEachPage = new List<string>();
-
-            var pageQuantity = await StaticNodeJSService.InvokeFromStringAsync<int>(pdfRasterizerJsCodeToExecute, args: new object[] { pathToPdf, pathToPngOutput }).ConfigureAwait(false);
-
+            var pageQuantity = await StaticNodeJSService.InvokeFromFileAsync<int>(pathToRasterizeJs, "convertToPng", args: new object[] { pathToPdf, pathToPngOutput }).ConfigureAwait(false);
             for (var pagenumber = 1; pagenumber <= pageQuantity; pagenumber++)
             {
                 pathsToPngOfEachPage.Add($"{pathToPngOutput}{pagenumber}.png");

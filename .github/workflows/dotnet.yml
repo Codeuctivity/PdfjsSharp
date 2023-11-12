@@ -15,12 +15,12 @@ jobs:
         os: [windows-latest, ubuntu-latest]
         node: ['20', '18']
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node }}
     - name: Restore dependencies
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
