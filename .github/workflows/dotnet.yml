@@ -1,6 +1,6 @@
 name: .NET build and test
 env:
-  CURRENT_VERSION: 1.3.${{ github.run_number }}
+  CURRENT_VERSION: 2.0.${{ github.run_number }}
   LAST_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
 
 on:
@@ -19,7 +19,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node }}
@@ -39,7 +39,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -50,15 +50,13 @@ jobs:
       if:  env.NUGET_TOKEN_EXISTS != ''
       run: |
           dotnet nuget push ./PdfJsSharp/bin/Release/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_TOKEN}} --source https://api.nuget.org/v3/index.json
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: ${{ env.CURRENT_VERSION }}
-        prerelease: false
-        title: "Release Build"
-        files: |
-          ./PdfJsSharp/bin/Release/*.nupkg
-          ./PdfJsSharp/bin/Release/*.snupkg
+    - name: Github prerelease
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.TOKEN }}
+      if:  env.GITHUB_TOKEN != ''
+      run: |
+          gh release create ${{env.CURRENT_VERSION}} ./PdfJsSharp/bin/Release/*.*nupkg  --prerelease --generate-notes
 
   deployTest:
     if: github.ref == 'refs/heads/main'
@@ -69,7 +67,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -81,12 +79,10 @@ jobs:
       run: |
           ls ./PdfJsSharp/bin/Release
           dotnet nuget push ./PdfJsSharp/bin/Release/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_TEST_TOKEN}} --source https://apiint.nugettest.org/v3/index.json
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest-prerelease"
-        prerelease: true
-        title: "Prerelease Build"
-        files: |
-          ./PdfJsSharp/bin/Release/*.nupkg
-          ./PdfJsSharp/bin/Release/*.snupkg
+    - name: Github prerelease
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.TOKEN }}
+      if:  env.GITHUB_TOKEN != ''
+      run: |
+          gh release create ${{env.CURRENT_VERSION}} ./PdfJsSharp/bin/Release/*.*nupkg  --prerelease --generate-notes
