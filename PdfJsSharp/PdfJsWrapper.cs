@@ -124,7 +124,7 @@ namespace Codeuctivity.PdfjsSharp
 
                     await ExtractBinaryFromManifest($"Codeuctivity.PdfjsSharp.node_modules.win.node{foundVersion}.zip").ConfigureAwait(false);
 
-                    pathToNodeModules = "file://" + pathToTempFolder.Replace("\\", "/") + "/node_modules/";
+                    pathToNodeModules = "file://" + pathToTempFolder.Replace("\\", "/", StringComparison.Ordinal) + "/node_modules/";
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
@@ -180,20 +180,23 @@ namespace Codeuctivity.PdfjsSharp
 
                     var home = Environment.GetEnvironmentVariable("HOME");
 
-                    var path = Path.Combine(home, ".nvm", "versions", "node");
-                    if (!string.IsNullOrEmpty(home) && Directory.Exists(path))
+                    if (home !=null)
                     {
-                        var installedNodeVersions = Directory.GetDirectories(path);
-
-                        var nodeExecutableDirectory = installedNodeVersions.FirstOrDefault(directory => SupportedNodeVersions.Any(version => Path.GetFileName(directory).StartsWith("v" + version.ToString(CultureInfo.InvariantCulture), true, CultureInfo.InvariantCulture)));
-
-                        if (nodeExecutableDirectory != null)
+                        var path = Path.Combine(home, ".nvm", "versions", "node");
+                        if (Directory.Exists(path))
                         {
-                            var nodePath = Path.Combine(path, nodeExecutableDirectory, "bin", "node");
-                            if (File.Exists(nodePath))
+                            var installedNodeVersions = Directory.GetDirectories(path);
+
+                            var nodeExecutableDirectory = installedNodeVersions.FirstOrDefault(directory => SupportedNodeVersions.Any(version => Path.GetFileName(directory).StartsWith("v" + version.ToString(CultureInfo.InvariantCulture), true, CultureInfo.InvariantCulture)));
+
+                            if (nodeExecutableDirectory != null)
                             {
-                                NodeExecutablePath = nodePath;
-                                return;
+                                var nodePath = Path.Combine(path, nodeExecutableDirectory, "bin", "node");
+                                if (File.Exists(nodePath))
+                                {
+                                    NodeExecutablePath = nodePath;
+                                    return;
+                                }
                             }
                         }
                     }
