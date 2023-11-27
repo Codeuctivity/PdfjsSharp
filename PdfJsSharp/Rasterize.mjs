@@ -37,16 +37,9 @@ class NodeCanvasFactory {
 }
 
 export async function convertToPng(sourceFile, targetPrefix) {
-  // Loading file from file system into typed array.
-  const data = new Uint8Array(fs.readFileSync(sourceFile));
-
   // Some PDFs need external cmaps.
   const CMAP_URL = "../../../node_modules/pdfjs-dist/cmaps/";
   const CMAP_PACKED = true;
-
-  // Where the standard fonts are located.
-  const STANDARD_FONT_DATA_URL =
-    "../../../node_modules/pdfjs-dist/standard_fonts/";
 
   const canvasFactory = new NodeCanvasFactory();
 

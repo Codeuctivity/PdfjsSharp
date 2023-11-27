@@ -2,16 +2,19 @@
     "cSpell.words": [
         "Codacy",
         "Codeuctivity",
-        "PDFs",
+        "dpkg",
+        "Jering",
+        "nuget",
+        "nupkg",
+        "OPTOUT",
         "Pdfjs",
+        "pdfjssharp",
+        "PDFs",
+        "pngs",
         "Rasterize",
         "Rasterizer",
         "Rasterizes",
-        "Xunit",
-        "dpkg",
-        "nuget",
-        "nupkg",
-        "pngs",
-        "snupkg"
+        "snupkg",
+        "Xunit"
     ]
 }

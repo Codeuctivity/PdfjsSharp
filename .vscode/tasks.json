@@ -2,12 +2,12 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build",
+      "label": "build (legacy)",
       "command": "dotnet",
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/PdfjsSharpTests/PdfjsSharpTests.csproj",
+        "${workspaceFolder}/PdfJsSharpTests/PdfJsSharpTests.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -19,7 +19,7 @@
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/PdfjsSharpTests/PdfjsSharpTests.csproj",
+        "${workspaceFolder}/PdfJsSharpTests/PdfJsSharpTests.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -32,7 +32,7 @@
       "args": [
         "watch",
         "run",
-        "${workspaceFolder}/PdfjsSharpTests/PdfjsSharpTests.csproj",
+        "${workspaceFolder}/PdfJsSharpTests/PdfJsSharpTests.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
