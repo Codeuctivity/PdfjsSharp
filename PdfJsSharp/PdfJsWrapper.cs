@@ -187,7 +187,7 @@ namespace Codeuctivity.PdfjsSharp
                         {
                             var installedNodeVersions = Directory.GetDirectories(path);
 
-                            var nodeExecutableDirectory = installedNodeVersions.FirstOrDefault(directory => SupportedNodeVersions.Any(version => Path.GetFileName(directory).StartsWith("v" + version.ToString(CultureInfo.InvariantCulture), true, CultureInfo.InvariantCulture)));
+                            var nodeExecutableDirectory = Array.Find(installedNodeVersions, directory => SupportedNodeVersions.Any(version => Path.GetFileName(directory).StartsWith("v" + version.ToString(CultureInfo.InvariantCulture), true, CultureInfo.InvariantCulture)));
 
                             if (nodeExecutableDirectory != null)
                             {
