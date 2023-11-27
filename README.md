@@ -49,8 +49,10 @@ Visual Studio 2022 or .net 6 SDK
 
 ```bash
 #In case you have no nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-sudo apt install dotnet6 zip
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash 
+exit
+nvm install 20
+sudo apt install dotnet8 zip
 echo export DOTNET_CLI_TELEMETRY_OPTOUT=1>> ~/.bash_profile
 ```
 
@@ -60,11 +62,9 @@ echo export DOTNET_CLI_TELEMETRY_OPTOUT=1>> ~/.bash_profile
 nvm install 18
 nvm use 18
 rm -R ./node_modules/ 
-npm install --omit=dev && rm node_modules.linux.node18.zip && zip -r node_modules.linux.node18.zip node_modules
-zip -g node_modules.linux.node18.zip Rasterize.mjs
+npm install --omit=dev && rm node_modules.linux.node18.zip && zip -r node_modules.linux.node18.zip node_modules && zip -g node_modules.linux.node18.zip Rasterize.mjs
 nvm install 20
 nvm use 20
 rm -R ./node_modules/ 
-npm install --omit=dev && rm node_modules.linux.node20.zip && zip -r node_modules.linux.node20.zip node_modules
-zip -g node_modules.linux.node20.zip Rasterize.mjs
+npm install --omit=dev && rm node_modules.linux.node20.zip && zip -r node_modules.linux.node20.zip node_modules && zip -g node_modules.linux.node20.zip Rasterize.mjs
 ```
