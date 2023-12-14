@@ -15,8 +15,6 @@ get
 - NodeJs
   - node 18 or 20 x64 (older node versions are supported by older PDFjsSharp versions)
 
-- .NET Framework 4.6.1 or .NET Core 2.0 or [something newer](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
-
 ## HowTo use
 
 - Install nuget package [PdfjsSharp](https://www.nuget.org/packages/Codeuctivity.PdfjsSharp/)
@@ -29,9 +27,7 @@ Assert.Equal(1, actualImages.Count);
 
 ## Development
 
-### Windows
-
-Visual Studio 2022 or .net 6 SDK
+get .net 8 sdk
 
 ### Upgrade npm packages
 
@@ -53,7 +49,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 exit
 nvm install 20
 sudo apt install dotnet8 zip
-echo export DOTNET_CLI_TELEMETRY_OPTOUT=1>> ~/.bash_profile
 ```
 
 #### Steps to update node_modules.linux.node\*.zip

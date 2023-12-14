@@ -50,13 +50,13 @@ jobs:
       if:  env.NUGET_TOKEN_EXISTS != ''
       run: |
           dotnet nuget push ./PdfJsSharp/bin/Release/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_TOKEN}} --source https://api.nuget.org/v3/index.json
-    - name: Github prerelease
+    - name: Github
       shell: bash
       env:
         GITHUB_TOKEN: ${{ github.TOKEN }}
       if:  env.GITHUB_TOKEN != ''
       run: |
-          gh release create ${{env.CURRENT_VERSION}} ./PdfJsSharp/bin/Release/*.*nupkg  --prerelease --generate-notes
+          gh release create ${{env.CURRENT_VERSION}} ./PdfJsSharp/bin/Release/*.*nupkg --generate-notes
 
   deployTest:
     if: github.ref == 'refs/heads/main'
