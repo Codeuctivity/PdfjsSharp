@@ -6,7 +6,7 @@
   "main": "Rasterize.mjs",
   "dependencies": {
     "assert": "^2.1.0",
-    "pdfjs-dist": "^4.0.269"
+    "pdfjs-dist": "^4.2.67"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
