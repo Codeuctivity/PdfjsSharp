@@ -21,7 +21,6 @@ namespace PdfJsSharpTests
         public async Task DisposeAsync()
         {
             Rasterizer.Dispose();
-            return Task.CompletedTask;
         }
     }
 }
