@@ -28,7 +28,7 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Supported node versions
         /// </summary>
-        private readonly ImmutableArray<int> SupportedNodeVersions = ImmutableArray.Create(18, 20);
+        private readonly ImmutableArray<int> SupportedNodeVersions = ImmutableArray.Create(18, 20, 22);
 
         internal bool IsInitialized { get; set; }
 
@@ -180,7 +180,7 @@ namespace Codeuctivity.PdfjsSharp
 
                     var home = Environment.GetEnvironmentVariable("HOME");
 
-                    if (home !=null)
+                    if (home != null)
                     {
                         var path = Path.Combine(home, ".nvm", "versions", "node");
                         if (Directory.Exists(path))

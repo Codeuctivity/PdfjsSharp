@@ -1,5 +1,5 @@
-using Codeuctivity.ImageSharpCompare;
 using Codeuctivity.PdfjsSharp;
+using Codeuctivity.SkiaSharpCompare;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,23 +28,26 @@ namespace PdfJsSharpTests
             //Pages converted: 1
             //First page path: /tmp/OutputPathPng1.png
 
-            Assert.Single( images);
+            Assert.Single(images);
             Assert.True(File.Exists(images.Single()), "Actual output file not found");
-            Assert.True(ImageSharpCompare.ImagesAreEqual(images.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"), "Actual and expected image do differ");
+            // File.Copy(images.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png", true);
+            Assert.True(Compare.ImagesAreEqual(images.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"), "Actual and expected image do differ");
             File.Delete(images.Single());
         }
 
         [Fact]
         public async Task ShouldCreatePngFromPdfCustomNodeExecutablePath()
         {
-            var actualImagePath = Path.Combine(Path.GetTempPath(), "ActualShouldCreatePngFromPdfCustomNodeExecutablePath");
-            using var rastirizerSut = new Rasterizer(Rasterizer.NodeExecutablePath);
+            var outputPath = Path.Combine(Path.GetTempPath(), "OutputPathPng");
 
-            var actualImages = await rastirizerSut.ConvertToPngAsync(@"../../../SourceTest.pdf", actualImagePath);
+            using var rastirizerSut = new Rasterizer(Rasterizer.NodeExecutablePath);
+            Assert.NotEmpty(Rasterizer.NodeExecutablePath);
+
+            var actualImages = await rastirizerSut.ConvertToPngAsync(Path.GetFullPath(@"../../../SourceTest.pdf"), outputPath);
 
             Assert.Single(actualImages);
             Assert.True(File.Exists(actualImages.Single()), "Actual output file not found");
-            Assert.True(ImageSharpCompare.ImagesAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"), "Actual and expected image do differ");
+            Assert.True(Compare.ImagesAreEqual(actualImages.Single(), @"../../../ExpectedImages/ExpectedShouldCreatePngFromPdf1.png"), "Actual and expected image do differ");
             File.Delete(actualImages.Single());
         }
     }
