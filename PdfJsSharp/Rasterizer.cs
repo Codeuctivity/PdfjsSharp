@@ -1,7 +1,6 @@
 ﻿using Jering.Javascript.NodeJS;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Codeuctivity.PdfjsSharp

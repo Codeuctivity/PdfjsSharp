@@ -6,7 +6,7 @@
   "main": "Rasterize.mjs",
   "dependencies": {
     "assert": "^2.1.0",
-    "pdfjs-dist": "^4.2.67"
+    "pdfjs-dist": "^4.10.38"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,6 +26,6 @@
   "homepage": "https://github.com/Codeuctivity/PdfjsSharp#readme",
   "devDependencies": {
     "@types/pdfjs-dist": "^2.10.378",
-    "eslint": "^8.54.0"
+    "eslint": "^9.21.0"
   }
 }
