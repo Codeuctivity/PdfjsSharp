@@ -9,14 +9,9 @@ using Xunit.Abstractions;
 
 namespace PdfJsSharpTests
 {
-    public class RasterizerTests : NodeVersionDetectorTestFixture
+    public class RasterizerTests(ITestOutputHelper output) : NodeVersionDetectorTestFixture
     {
-        private readonly ITestOutputHelper Console;
-
-        public RasterizerTests(ITestOutputHelper output)
-        {
-            Console = output;
-        }
+        private readonly ITestOutputHelper Console = output;
 
         [Fact]
         public async Task ShouldCreatePngFromPdf()
