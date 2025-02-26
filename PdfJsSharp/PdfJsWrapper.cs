@@ -19,7 +19,7 @@ namespace Codeuctivity.PdfjsSharp
     public class PdfJsWrapper : IDisposable
     {
         internal const int windowsMaxPathLength = 206;
-        internal static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+        internal static readonly SemaphoreSlim semaphore = new(1, 1);
         internal bool useCustomNodeModulePath;
         internal string pathToNodeModules = default!;
         internal string pathToTempFolder = default!;
@@ -28,7 +28,7 @@ namespace Codeuctivity.PdfjsSharp
         /// <summary>
         /// Supported node versions
         /// </summary>
-        private readonly ImmutableArray<int> SupportedNodeVersions = ImmutableArray.Create(18, 20, 22);
+        private readonly ImmutableArray<int> SupportedNodeVersions = [20, 22];
 
         internal bool IsInitialized { get; set; }
 

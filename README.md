@@ -13,7 +13,7 @@ Brings [PDF.js](https://github.com/mozilla/pdf.js) to .net
 get
 
 - NodeJs
-  - node 18, 20 or 22 x64 (older node versions are supported by older PDFjsSharp versions)
+  - node 20 or 22 x64 (older node versions are supported by older PDFjsSharp versions)
 
 ## HowTo use
 
