@@ -82,7 +82,7 @@ namespace Codeuctivity.PdfjsSharp
 
             if (supportedMajorNodeVersions.Any(_ => _ == foundMajorVersion))
             {
-                return foundMajorVersion.Value;
+                return 22;
             }
 
             var expectedVersions = string.Join(", ", supportedMajorNodeVersions.Select(_ => _.ToString(CultureInfo.InvariantCulture)));

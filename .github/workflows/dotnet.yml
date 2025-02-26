@@ -13,11 +13,11 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
-        node: ['20', '18']
+        node: ['20', '22']
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
     - uses: actions/setup-node@v4
@@ -37,7 +37,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
@@ -50,13 +50,13 @@ jobs:
       if:  env.NUGET_TOKEN_EXISTS != ''
       run: |
           dotnet nuget push ./PdfJsSharp/bin/Release/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_TOKEN}} --source https://api.nuget.org/v3/index.json
-    - name: Github prerelease
+    - name: Github
       shell: bash
       env:
         GITHUB_TOKEN: ${{ github.TOKEN }}
       if:  env.GITHUB_TOKEN != ''
       run: |
-          gh release create ${{env.CURRENT_VERSION}} ./PdfJsSharp/bin/Release/*.*nupkg  --prerelease --generate-notes
+          gh release create ${{env.CURRENT_VERSION}} ./PdfJsSharp/bin/Release/*.*nupkg --generate-notes
 
   deployTest:
     if: github.ref == 'refs/heads/main'
@@ -65,7 +65,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies

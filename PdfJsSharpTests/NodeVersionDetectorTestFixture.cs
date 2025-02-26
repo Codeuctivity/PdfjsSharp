@@ -13,15 +13,14 @@ namespace PdfJsSharpTests
             Rasterizer = new Rasterizer();
         }
 
-        public Task InitializeAsync()
+        public async Task InitializeAsync()
         {
-            return Rasterizer.InitPdfJsWrapper();
+            await Rasterizer.InitPdfJsWrapper();
         }
 
-        public Task DisposeAsync()
+        public async Task DisposeAsync()
         {
             Rasterizer.Dispose();
-            return Task.CompletedTask;
         }
     }
 }
