@@ -68,11 +68,9 @@
 
 
   <ItemGroup>
-    <None Remove="node_modules.linux.node20.zip" />
-    <None Remove="node_modules.win.node20.zip" />
+    <None Remove="Rasterize.mjs" />
     <None Remove="node_modules.linux.node22.zip" />
     <None Remove="node_modules.win.node22.zip" />
-    <None Remove="Rasterize.mjs" />
   </ItemGroup>
 
   <ItemGroup>

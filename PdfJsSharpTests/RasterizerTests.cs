@@ -1,5 +1,6 @@
 using Codeuctivity.PdfjsSharp;
 using Codeuctivity.SkiaSharpCompare;
+using Jering.Javascript.NodeJS;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace PdfJsSharpTests
         public async Task ShouldCreatePngFromPdfCustomNodeExecutablePath()
         {
             var outputPath = Path.Combine(Path.GetTempPath(), "OutputPathPng");
-
+            StaticNodeJSService.DisposeServiceProvider();
             using var rastirizerSut = new Rasterizer(Rasterizer.NodeExecutablePath);
             Assert.NotEmpty(Rasterizer.NodeExecutablePath);
 

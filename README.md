@@ -13,7 +13,7 @@ Brings [PDF.js](https://github.com/mozilla/pdf.js) to .net
 get
 
 - NodeJs
-  - node 20 or 22 x64 (older node versions are supported by older PDFjsSharp versions)
+  - node 18, 20 or 22 x64 (older node versions are supported by older PDFjsSharp versions)
 
 ## HowTo use
 
@@ -38,7 +38,6 @@ get .net 8 sdk
 ```Powershell
  cd .\PdfjsSharp\
  nvm install 22;nvm use 22;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node22.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node22.zip;Compress-Archive -Update .\Rasterize.mjs .\node_modules.win.node22.zip
- nvm install 20;nvm use 20;rm -R .\node_modules\;npm install --omit=dev;rm .\node_modules.win.node20.zip;Compress-Archive -LiteralPath .\node_modules\ -DestinationPath .\node_modules.win.node20.zip;Compress-Archive -Update .\Rasterize.mjs .\node_modules.win.node20.zip
 ```
 
 ### Ubuntu 22.04
@@ -47,7 +46,7 @@ get .net 8 sdk
 #In case you have no nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash 
 exit
-nvm install 20
+nvm install 22
 sudo apt install dotnet8 zip
 ```
 
@@ -58,8 +57,4 @@ nvm install 22
 nvm use 22
 rm -R ./node_modules/ 
 npm install --omit=dev && rm node_modules.linux.node22.zip && zip -r node_modules.linux.node22.zip node_modules && zip -g node_modules.linux.node22.zip Rasterize.mjs
-nvm install 20
-nvm use 20
-rm -R ./node_modules/ 
-npm install --omit=dev && rm node_modules.linux.node20.zip && zip -r node_modules.linux.node20.zip node_modules && zip -g node_modules.linux.node20.zip Rasterize.mjs
 ```
