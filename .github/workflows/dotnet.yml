@@ -19,7 +19,9 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: |
+          8.0.x
+          10.0.x
     - uses: actions/setup-node@v6
       with:
         node-version: ${{ matrix.node }}
@@ -39,7 +41,9 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: |
+          8.0.x
+          10.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -67,7 +71,9 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: |
+          8.0.x
+          10.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
