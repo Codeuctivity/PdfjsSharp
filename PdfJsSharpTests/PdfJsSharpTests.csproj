@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Codeuctivity.SkiaSharpCompare" Version="3.2.245" />
+    <PackageReference Include="Codeuctivity.SkiaSharpCompare" Version="3.2.263" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="10.6.0.109712">
       <PrivateAssets>all</PrivateAssets>
