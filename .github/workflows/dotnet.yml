@@ -22,7 +22,7 @@ jobs:
         dotnet-version: |
           8.0.x
           10.0.x
-    - uses: actions/setup-node@v6
+    - uses: actions/setup-node@v7
       with:
         node-version: ${{ matrix.node }}
     - name: Restore dependencies
